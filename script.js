@@ -1,22 +1,103 @@
 /* =========================================
    ZISWAF DIGITAL - SCRIPT.JS
+   DATABASE ONLINE FIREBASE
    ========================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+/* =========================================
+   FIREBASE CONFIG
+   GANTI BAGIAN INI DENGAN CONFIG FIREBASE
+   ========================================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCeeDdqNVV07VYVGYSF9Wm2FpfsknOgNR0",
+  authDomain: "ziswaf-digital.firebaseapp.com",
+  projectId: "ziswaf-digital",
+  storageBucket: "ziswaf-digital.firebasestorage.app",
+  messagingSenderId: "695185758754",
+  appId: "1:695185758754:web:1eccca853e07c71442887b",
+  measurementId: "G-Y5MG2TGYP5"
+};
+
+/* =========================================
+   LOAD FIREBASE
+   ========================================= */
+
+document.addEventListener("DOMContentLoaded", async function () {
+
+    /* =========================================
+       IMPORT FIREBASE
+       ========================================= */
+
+    let db;
+
+    try {
+
+        const { initializeApp } =
+            await import(
+                "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js"
+            );
+
+        const {
+            getFirestore,
+            collection,
+            addDoc,
+            onSnapshot,
+            query,
+            orderBy
+        } =
+            await import(
+                "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
+            );
+
+        const app = initializeApp(firebaseConfig);
+
+        db = getFirestore(app);
+
+        console.log("Firebase berhasil terhubung.");
+
+        /* =========================================
+           SIMPAN FIREBASE FUNCTIONS
+        ========================================= */
+
+        window.firebaseDB = db;
+        window.firebaseCollection = collection;
+        window.firebaseAddDoc = addDoc;
+        window.firebaseOnSnapshot = onSnapshot;
+        window.firebaseQuery = query;
+        window.firebaseOrderBy = orderBy;
+
+    } catch (error) {
+
+        console.error(
+            "Firebase gagal terhubung:",
+            error
+        );
+
+        alert(
+            "Firebase belum terhubung. Periksa Firebase Config."
+        );
+
+        return;
+    }
 
 
     /* =========================================
        NAVIGASI
-    ========================================= */
+       ========================================= */
 
-    const pages = document.querySelectorAll(".page");
-    const menuLinks = document.querySelectorAll(".menu-link");
-    const navLinks = document.querySelectorAll(".nav-menu .menu-link");
+    const pages =
+        document.querySelectorAll(".page");
+
+    const menuLinks =
+        document.querySelectorAll(".menu-link");
+
+    const navLinks =
+        document.querySelectorAll(".nav-menu .menu-link");
 
 
     /* =========================================
        MENU HAMBURGER MOBILE
-    ========================================= */
+       ========================================= */
 
     const menuToggle =
         document.getElementById("menuToggle");
@@ -26,284 +107,404 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (menuToggle && navMenu) {
 
-        menuToggle.addEventListener("click", function () {
-            navMenu.classList.toggle("active");
-        });
+        menuToggle.addEventListener(
+            "click",
+            function () {
 
-        navMenu.querySelectorAll(".menu-link").forEach(link => {
+                navMenu.classList.toggle(
+                    "active"
+                );
 
-            link.addEventListener("click", function () {
-                navMenu.classList.remove("active");
+            }
+        );
+
+
+        navMenu
+            .querySelectorAll(".menu-link")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        navMenu.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
             });
-
-        });
 
     }
 
 
+    /* =========================================
+       SISTEM HALAMAN
+       ========================================= */
+
     function showPage(pageId) {
 
         pages.forEach(page => {
-            page.classList.remove("active-page");
+
+            page.classList.remove(
+                "active-page"
+            );
+
         });
+
 
         const targetPage =
             document.getElementById(pageId);
 
+
         if (targetPage) {
-            targetPage.classList.add("active-page");
+
+            targetPage.classList.add(
+                "active-page"
+            );
+
             targetPage.scrollTop = 0;
+
         }
 
+
         navLinks.forEach(link => {
+
             link.classList.toggle(
                 "active",
                 link.dataset.page === pageId
             );
+
         });
 
     }
 
-    
-  
 
-
-    function showPage(pageId) {
-
-        pages.forEach(page => {
-            page.classList.remove("active-page");
-        });
-
-        const targetPage = document.getElementById(pageId);
-
-        if (targetPage) {
-            targetPage.classList.add("active-page");
-            targetPage.scrollTop = 0;
-        }
-
-        navLinks.forEach(link => {
-            link.classList.toggle(
-                "active",
-                link.dataset.page === pageId
-            );
-        });
-    }
+    /* =========================================
+       LINK MENU
+       ========================================= */
 
     menuLinks.forEach(link => {
 
-        link.addEventListener("click", function (e) {
+        link.addEventListener(
+            "click",
+            function (e) {
 
-            e.preventDefault();
+                e.preventDefault();
 
-            const pageId = this.dataset.page;
+                const pageId =
+                    this.dataset.page;
 
-            if (pageId) {
-                showPage(pageId);
+                if (pageId) {
+
+                    showPage(pageId);
+
+                }
+
             }
-
-        });
+        );
 
     });
 
 
     /* =========================================
        FORMAT RUPIAH
-    ========================================= */
+       ========================================= */
 
     function formatRupiah(number) {
 
-        return new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-            minimumFractionDigits: 0
-        }).format(Number(number) || 0);
+        return new Intl.NumberFormat(
+            "id-ID",
+            {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0
+            }
+        ).format(Number(number) || 0);
 
     }
 
 
     /* =========================================
        NOMINAL DONASI
-    ========================================= */
+       ========================================= */
 
     const nominalButtons =
-        document.querySelectorAll(".nominal-btn");
+        document.querySelectorAll(
+            ".nominal-btn"
+        );
 
     const customAmount =
-        document.getElementById("customAmount");
+        document.getElementById(
+            "customAmount"
+        );
 
     const totalAmount =
-        document.getElementById("totalAmount");
+        document.getElementById(
+            "totalAmount"
+        );
+
 
     let selectedAmount = 0;
 
+
     function updateTotal() {
 
-        let amount = selectedAmount;
+        let amount =
+            selectedAmount;
 
-        if (customAmount && customAmount.value) {
-            amount = Number(customAmount.value);
+
+        if (
+            customAmount &&
+            customAmount.value
+        ) {
+
+            amount =
+                Number(
+                    customAmount.value
+                );
+
         }
+
 
         if (!amount || amount < 0) {
+
             amount = 0;
+
         }
 
+
         if (totalAmount) {
+
             totalAmount.textContent =
                 formatRupiah(amount);
+
         }
+
     }
 
 
     nominalButtons.forEach(button => {
 
-        button.addEventListener("click", function () {
+        button.addEventListener(
+            "click",
+            function () {
 
-            nominalButtons.forEach(btn => {
-                btn.classList.remove("selected");
-            });
+                nominalButtons.forEach(
+                    btn => {
 
-            this.classList.add("selected");
+                        btn.classList.remove(
+                            "selected"
+                        );
 
-            selectedAmount =
-                Number(
-                    this.textContent.replace(/\D/g, "")
+                    }
                 );
 
-            if (customAmount) {
-                customAmount.value = "";
+
+                this.classList.add(
+                    "selected"
+                );
+
+
+                selectedAmount =
+                    Number(
+                        this.textContent.replace(
+                            /\D/g,
+                            ""
+                        )
+                    );
+
+
+                if (customAmount) {
+
+                    customAmount.value = "";
+
+                }
+
+
+                updateTotal();
+
             }
-
-            updateTotal();
-
-        });
+        );
 
     });
 
 
     if (customAmount) {
 
-        customAmount.addEventListener("input", function () {
+        customAmount.addEventListener(
+            "input",
+            function () {
 
-            nominalButtons.forEach(btn => {
-                btn.classList.remove("selected");
-            });
+                nominalButtons.forEach(
+                    btn => {
 
-            selectedAmount = 0;
+                        btn.classList.remove(
+                            "selected"
+                        );
 
-            updateTotal();
+                    }
+                );
 
-        });
+
+                selectedAmount = 0;
+
+                updateTotal();
+
+            }
+        );
 
     }
 
 
     /* =========================================
        DATA DONASI
-    ========================================= */
+       FIRESTORE ONLINE
+       ========================================= */
 
-    let donations =
-        JSON.parse(
-            localStorage.getItem("ziswafDonations")
-        ) || [];
+    let donations = [];
+
 
     const donationList =
-        document.getElementById("donationList");
+        document.getElementById(
+            "donationList"
+        );
 
 
     /* =========================================
        DASHBOARD BERANDA
-    ========================================= */
+       ========================================= */
 
     const totalDonatur =
-        document.getElementById("totalDonatur");
+        document.getElementById(
+            "totalDonatur"
+        );
 
     const totalDana =
-        document.getElementById("totalDana");
+        document.getElementById(
+            "totalDana"
+        );
 
     const totalProgram =
-        document.getElementById("totalProgram");
+        document.getElementById(
+            "totalProgram"
+        );
 
 
     /* =========================================
        DASHBOARD TRANSPARANSI
-    ========================================= */
+       ========================================= */
 
     const transparencyDonatur =
-        document.querySelector(".transparency-total-donatur");
+        document.querySelector(
+            ".transparency-total-donatur"
+        );
 
     const transparencyDana =
-        document.querySelector(".transparency-total-dana");
+        document.querySelector(
+            ".transparency-total-dana"
+        );
 
     const transparencyProgram =
-        document.querySelector(".transparency-total-program");
+        document.querySelector(
+            ".transparency-total-program"
+        );
 
 
     /* =========================================
        UPDATE DASHBOARD
-    ========================================= */
+       ========================================= */
 
     function updateDashboard() {
 
         const jumlahDonatur =
             donations.length;
 
+
         const jumlahDana =
             donations.reduce(
                 (total, donation) =>
-                    total + Number(donation.amount || 0),
+                    total +
+                    Number(
+                        donation.amount || 0
+                    ),
                 0
             );
+
 
         const programUnik =
             new Set(
                 donations
-                    .map(donation => donation.program)
+                    .map(
+                        donation =>
+                            donation.program
+                    )
                     .filter(Boolean)
             );
 
 
         /* =========================================
            BERANDA
-        ========================================= */
+           ========================================= */
 
         if (totalDonatur) {
+
             totalDonatur.textContent =
                 jumlahDonatur > 0
                     ? jumlahDonatur + "+"
                     : "0";
+
         }
+
 
         if (totalDana) {
+
             totalDana.textContent =
-                formatRupiah(jumlahDana);
+                formatRupiah(
+                    jumlahDana
+                );
+
         }
 
+
         if (totalProgram) {
+
             totalProgram.textContent =
                 programUnik.size > 0
                     ? programUnik.size + "+"
                     : "0";
+
         }
 
 
         /* =========================================
            TRANSPARANSI
-        ========================================= */
+           ========================================= */
 
         if (transparencyDonatur) {
+
             transparencyDonatur.textContent =
                 jumlahDonatur;
+
         }
+
 
         if (transparencyDana) {
+
             transparencyDana.textContent =
-                formatRupiah(jumlahDana);
+                formatRupiah(
+                    jumlahDana
+                );
+
         }
 
+
         if (transparencyProgram) {
+
             transparencyProgram.textContent =
                 programUnik.size;
+
         }
 
     }
@@ -311,86 +512,191 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================
        TABEL DONASI
-    ========================================= */
+       ========================================= */
 
     function renderDonations() {
 
         if (!donationList) return;
 
+
         donationList.innerHTML = "";
+
 
         if (donations.length === 0) {
 
             donationList.innerHTML = `
                 <tr>
                     <td colspan="5"
-                        style="text-align:center;color:#7b877f;">
+                        style="
+                            text-align:center;
+                            color:#7b877f;
+                        ">
                         Belum ada donasi terbaru.
                     </td>
                 </tr>
             `;
 
             return;
+
         }
 
 
-        donations.forEach(donation => {
+        donations.forEach(
+            donation => {
 
-            const row =
-                document.createElement("tr");
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
 
-            row.innerHTML = `
-                <td>${donation.nama}</td>
-                <td>${donation.jenis}</td>
-                <td>${donation.program}</td>
-                <td>${formatRupiah(donation.amount)}</td>
-                <td>
-                    <span class="status">
-                        ${donation.status}
-                    </span>
-                </td>
-            `;
 
-            donationList.appendChild(row);
+                row.innerHTML = `
+                    <td>
+                        ${donation.nama || "-"}
+                    </td>
 
-        });
+                    <td>
+                        ${donation.jenis || "-"}
+                    </td>
+
+                    <td>
+                        ${donation.program || "-"}
+                    </td>
+
+                    <td>
+                        ${formatRupiah(
+                            donation.amount
+                        )}
+                    </td>
+
+                    <td>
+                        <span class="status">
+                            ${donation.status || "Selesai"}
+                        </span>
+                    </td>
+                `;
+
+
+                donationList.appendChild(
+                    row
+                );
+
+            }
+        );
 
     }
 
 
     /* =========================================
-       TAMPILKAN DATA AWAL
-    ========================================= */
+       REALTIME FIRESTORE
+       ========================================= */
 
-    renderDonations();
-    updateDashboard();
+    try {
+
+        const donationsRef =
+            window.firebaseCollection(
+                window.firebaseDB,
+                "donations"
+            );
+
+
+        const donationsQuery =
+            window.firebaseQuery(
+                donationsRef,
+                window.firebaseOrderBy(
+                    "createdAt",
+                    "desc"
+                )
+            );
+
+
+        window.firebaseOnSnapshot(
+            donationsQuery,
+            snapshot => {
+
+                donations =
+                    snapshot.docs.map(
+                        doc => ({
+                            id: doc.id,
+                            ...doc.data()
+                        })
+                    );
+
+
+                console.log(
+                    "Data donasi diperbarui:",
+                    donations
+                );
+
+
+                renderDonations();
+
+                updateDashboard();
+
+            },
+            error => {
+
+                console.error(
+                    "Gagal mengambil data donasi:",
+                    error
+                );
+
+            }
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Realtime database error:",
+            error
+        );
+
+    }
 
 
     /* =========================================
        FORM DONASI
-    ========================================= */
+       ========================================= */
 
     const donationForm =
-        document.getElementById("donationForm");
+        document.getElementById(
+            "donationForm"
+        );
+
 
     let currentDonation = null;
 
 
     /* =========================================
        BUAT MODAL QRIS
-    ========================================= */
+       ========================================= */
 
     function createQRISModal() {
 
-        if (document.getElementById("qrisModal")) {
+        if (
+            document.getElementById(
+                "qrisModal"
+            )
+        ) {
+
             return;
+
         }
 
-        const modal =
-            document.createElement("div");
 
-        modal.id = "qrisModal";
-        modal.className = "qris-modal";
+        const modal =
+            document.createElement(
+                "div"
+            );
+
+
+        modal.id =
+            "qrisModal";
+
+
+        modal.className =
+            "qris-modal";
+
 
         modal.innerHTML = `
 
@@ -403,13 +709,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     ×
                 </button>
 
+
                 <div class="qris-icon">
                     💳
                 </div>
 
+
                 <h2>
                     Pembayaran QRIS
                 </h2>
+
 
                 <p
                     class="qris-program"
@@ -417,11 +726,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     Program
                 </p>
 
+
                 <div
                     class="qris-amount"
                     id="qrisAmount">
                     Rp0
                 </div>
+
 
                 <div class="qris-image">
 
@@ -430,6 +741,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         alt="QRIS Pembayaran"
                         onerror="
                             this.style.display='none';
+
                             this.parentElement.innerHTML =
                             '<p style=&quot;
                             color:#718078;
@@ -445,10 +757,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 </div>
 
+
                 <p class="qris-instruction">
                     Scan kode QRIS menggunakan aplikasi
                     pembayaran yang mendukung QRIS.
                 </p>
+
 
                 <div class="qris-status">
 
@@ -457,6 +771,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     Menunggu pembayaran...
 
                 </div>
+
 
                 <button
                     type="button"
@@ -469,46 +784,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
         `;
 
-        document.body.appendChild(modal);
+
+        document.body.appendChild(
+            modal
+        );
 
 
         /* =========================================
            TOMBOL X
-        ========================================= */
+           ========================================= */
 
         const closeButton =
-            document.getElementById("qrisClose");
+            document.getElementById(
+                "qrisClose"
+            );
 
-        closeButton.addEventListener("click", function () {
 
-            modal.classList.remove("show");
-            modal.style.display = "";
+        closeButton.addEventListener(
+            "click",
+            function () {
 
-        });
+                modal.classList.remove(
+                    "show"
+                );
+
+                modal.style.display = "";
+
+            }
+        );
 
 
         /* =========================================
            KLIK LUAR MODAL
-        ========================================= */
+           ========================================= */
 
-        modal.addEventListener("click", function (e) {
+        modal.addEventListener(
+            "click",
+            function (e) {
 
-            if (e.target === modal) {
+                if (e.target === modal) {
 
-                modal.classList.remove("show");
-                modal.style.display = "";
+                    modal.classList.remove(
+                        "show"
+                    );
+
+                    modal.style.display = "";
+
+                }
 
             }
-
-        });
+        );
 
 
         /* =========================================
            TOMBOL SUDAH MEMBAYAR
-        ========================================= */
+           ========================================= */
 
         const paidButton =
-            document.getElementById("qrisPaidModal");
+            document.getElementById(
+                "qrisPaidModal"
+            );
+
 
         paidButton.addEventListener(
             "click",
@@ -523,7 +859,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================
        SUBMIT FORM DONASI
-    ========================================= */
+       ========================================= */
 
     if (donationForm) {
 
@@ -535,31 +871,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const namaInput =
-                    document.getElementById("nama");
+                    document.getElementById(
+                        "nama"
+                    );
+
 
                 const jenisInput =
-                    document.getElementById("jenis");
+                    document.getElementById(
+                        "jenis"
+                    );
+
 
                 const programInput =
-                    document.getElementById("program-select");
+                    document.getElementById(
+                        "program-select"
+                    );
+
 
                 const anonymousInput =
-                    document.getElementById("anonymous");
+                    document.getElementById(
+                        "anonymous"
+                    );
 
 
                 const nama =
                     namaInput.value.trim();
+
 
                 const jenis =
                     jenisInput.options[
                         jenisInput.selectedIndex
                     ].text;
 
+
                 const program =
                     programInput.value;
 
 
-                let amount = selectedAmount;
+                let amount =
+                    selectedAmount;
+
 
                 if (
                     customAmount &&
@@ -567,14 +918,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 ) {
 
                     amount =
-                        Number(customAmount.value);
+                        Number(
+                            customAmount.value
+                        );
 
                 }
 
 
                 /* =========================================
                    VALIDASI NAMA
-                ========================================= */
+                   ========================================= */
 
                 if (!nama) {
 
@@ -585,26 +938,31 @@ document.addEventListener("DOMContentLoaded", function () {
                     namaInput.focus();
 
                     return;
+
                 }
 
 
                 /* =========================================
                    VALIDASI NOMINAL
-                ========================================= */
+                   ========================================= */
 
-                if (!amount || amount < 1000) {
+                if (
+                    !amount ||
+                    amount < 1000
+                ) {
 
                     alert(
                         "Silakan pilih nominal donasi minimal Rp1.000."
                     );
 
                     return;
+
                 }
 
 
                 /* =========================================
                    NAMA
-                ========================================= */
+                   ========================================= */
 
                 const displayName =
                     anonymousInput &&
@@ -615,47 +973,62 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 /* =========================================
                    DATA SEMENTARA
-                ========================================= */
+                   ========================================= */
 
                 currentDonation = {
 
-                    nama: displayName,
+                    nama:
+                        displayName,
 
-                    jenis: jenis,
+                    jenis:
+                        jenis,
 
-                    program: program,
+                    program:
+                        program,
 
-                    amount: amount,
+                    amount:
+                        amount,
 
-                    status: "Menunggu"
+                    status:
+                        "Menunggu"
 
                 };
 
 
                 /* =========================================
                    ISI DATA QRIS
-                ========================================= */
+                   ========================================= */
 
                 const modal =
-                    document.getElementById("qrisModal");
+                    document.getElementById(
+                        "qrisModal"
+                    );
+
 
                 document.getElementById(
                     "qrisProgram"
                 ).textContent =
                     `${jenis} • ${program}`;
 
+
                 document.getElementById(
                     "qrisAmount"
                 ).textContent =
-                    formatRupiah(amount);
+                    formatRupiah(
+                        amount
+                    );
 
 
                 /* =========================================
                    TAMPILKAN QRIS
-                ========================================= */
+                   ========================================= */
 
-                modal.classList.add("show");
-                modal.style.display = "flex";
+                modal.classList.add(
+                    "show"
+                );
+
+                modal.style.display =
+                    "flex";
 
             }
         );
@@ -665,9 +1038,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================
        KONFIRMASI PEMBAYARAN
-    ========================================= */
+       ========================================= */
 
-    function confirmPayment() {
+    async function confirmPayment() {
 
         if (!currentDonation) {
 
@@ -676,81 +1049,147 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return;
+
         }
 
 
         /* =========================================
            UBAH STATUS
-        ========================================= */
+           ========================================= */
 
-        currentDonation.status = "Selesai";
-
-
-        /* =========================================
-           SIMPAN DONASI
-        ========================================= */
-
-        donations.unshift(currentDonation);
-
-        localStorage.setItem(
-            "ziswafDonations",
-            JSON.stringify(donations)
-        );
+        currentDonation.status =
+            "Selesai";
 
 
         /* =========================================
-           UPDATE SEMUA DATA
-        ========================================= */
+           SIMPAN KE FIREBASE
+           ========================================= */
 
-        renderDonations();
+        try {
 
-        updateDashboard();
+            const donationData = {
+
+                nama:
+                    currentDonation.nama,
+
+                jenis:
+                    currentDonation.jenis,
+
+                program:
+                    currentDonation.program,
+
+                amount:
+                    Number(
+                        currentDonation.amount
+                    ),
+
+                status:
+                    "Selesai",
+
+                createdAt:
+                    Date.now()
+
+            };
+
+
+            await window.firebaseAddDoc(
+
+                window.firebaseCollection(
+                    window.firebaseDB,
+                    "donations"
+                ),
+
+                donationData
+
+            );
+
+
+            console.log(
+                "Donasi berhasil disimpan ke Firebase."
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Gagal menyimpan donasi:",
+                error
+            );
+
+
+            alert(
+                "Donasi gagal dicatat ke database. Periksa koneksi internet."
+            );
+
+            return;
+
+        }
 
 
         /* =========================================
            TUTUP QRIS
-        ========================================= */
+           ========================================= */
 
         const modal =
-            document.getElementById("qrisModal");
+            document.getElementById(
+                "qrisModal"
+            );
+
 
         if (modal) {
 
-            modal.classList.remove("show");
-            modal.style.display = "none";
+            modal.classList.remove(
+                "show"
+            );
+
+            modal.style.display =
+                "none";
 
         }
 
 
         /* =========================================
            RESET FORM
-        ========================================= */
+           ========================================= */
 
         if (donationForm) {
+
             donationForm.reset();
+
         }
+
 
         selectedAmount = 0;
 
-        nominalButtons.forEach(button => {
-            button.classList.remove("selected");
-        });
+
+        nominalButtons.forEach(
+            button => {
+
+                button.classList.remove(
+                    "selected"
+                );
+
+            }
+        );
+
 
         updateTotal();
 
 
         /* =========================================
            HAPUS DATA SEMENTARA
-        ========================================= */
+           ========================================= */
 
         currentDonation = null;
 
 
         /* =========================================
            PINDAH KE TRANSPARANSI
-        ========================================= */
+           ========================================= */
 
-        showPage("transparansi");
+        showPage(
+            "transparansi"
+        );
 
 
         alert(
@@ -762,7 +1201,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================
        ESC UNTUK TUTUP QRIS
-    ========================================= */
+       ========================================= */
 
     document.addEventListener(
         "keydown",
@@ -771,12 +1210,19 @@ document.addEventListener("DOMContentLoaded", function () {
             if (e.key === "Escape") {
 
                 const modal =
-                    document.getElementById("qrisModal");
+                    document.getElementById(
+                        "qrisModal"
+                    );
+
 
                 if (modal) {
 
-                    modal.classList.remove("show");
-                    modal.style.display = "";
+                    modal.classList.remove(
+                        "show"
+                    );
+
+                    modal.style.display =
+                        "";
 
                 }
 
@@ -788,9 +1234,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================
        TOTAL AWAL
-    ========================================= */
+       ========================================= */
 
     updateTotal();
+
     updateDashboard();
 
 });
