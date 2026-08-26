@@ -1,88 +1,48 @@
 /* =========================================
    ZISWAF DIGITAL - SCRIPT.JS
    DATABASE ONLINE FIREBASE
+   VERSI FIX MENU + FIREBASE
    ========================================= */
+
 
 /* =========================================
    FIREBASE CONFIG
-   GANTI BAGIAN INI DENGAN CONFIG FIREBASE
    ========================================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCeeDdqNVV07VYVGYSF9Wm2FpfsknOgNR0",
-  authDomain: "ziswaf-digital.firebaseapp.com",
-  projectId: "ziswaf-digital",
-  storageBucket: "ziswaf-digital.firebasestorage.app",
-  messagingSenderId: "695185758754",
-  appId: "1:695185758754:web:1eccca853e07c71442887b",
-  measurementId: "G-Y5MG2TGYP5"
+    apiKey: "AIzaSyCeeDdqNVV07VYVGYSF9Wm2FpfsknOgNR0",
+    authDomain: "ziswaf-digital.firebaseapp.com",
+    projectId: "ziswaf-digital",
+    storageBucket: "ziswaf-digital.firebasestorage.app",
+    messagingSenderId: "695185758754",
+    appId: "1:695185758754:web:1eccca853e07c71442887b",
+    measurementId: "G-Y5MG2TGYP5"
 };
 
+
 /* =========================================
-   LOAD FIREBASE
+   GLOBAL VARIABLE
    ========================================= */
 
-document.addEventListener("DOMContentLoaded", async function () {
+let db = null;
 
-    /* =========================================
-       IMPORT FIREBASE
-       ========================================= */
+let donations = [];
 
-    let db;
+let selectedAmount = 0;
 
-    try {
+let currentDonation = null;
 
-        const { initializeApp } =
-            await import(
-                "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js"
-            );
 
-        const {
-            getFirestore,
-            collection,
-            addDoc,
-            onSnapshot,
-            query,
-            orderBy
-        } =
-            await import(
-                "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
-            );
+/* =========================================
+   DOM READY
+   ========================================= */
 
-        const app = initializeApp(firebaseConfig);
-
-        db = getFirestore(app);
-
-        console.log("Firebase berhasil terhubung.");
-
-        /* =========================================
-           SIMPAN FIREBASE FUNCTIONS
-        ========================================= */
-
-        window.firebaseDB = db;
-        window.firebaseCollection = collection;
-        window.firebaseAddDoc = addDoc;
-        window.firebaseOnSnapshot = onSnapshot;
-        window.firebaseQuery = query;
-        window.firebaseOrderBy = orderBy;
-
-    } catch (error) {
-
-        console.error(
-            "Firebase gagal terhubung:",
-            error
-        );
-
-        alert(
-            "Firebase belum terhubung. Periksa Firebase Config."
-        );
-
-        return;
-    }
+document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
        NAVIGASI
+       JALAN DULUAN SEBELUM FIREBASE
        ========================================= */
 
     const pages =
@@ -96,96 +56,81 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =========================================
-       MENU HAMBURGER MOBILE
+       MENU TITIK 3 / MOBILE
        ========================================= */
-
-    const menuToggle =
-        document.getElementById("menuToggle");
-
-    const navMenu =
-        document.querySelector(".nav-menu");
-
-    if (menuToggle && navMenu) {
-
-        menuToggle.addEventListener(
-            "click",
-            function () {
-
-                navMenu.classList.toggle(
-                    "active"
-                );
-
-            }
-        );
-
-
-        navMenu
-            .querySelectorAll(".menu-link")
-            .forEach(link => {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        navMenu.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-            });
-
-    }
-
 
     /* =========================================
-       SISTEM HALAMAN
-       ========================================= */
+   MENU MOBILE
+   ========================================= */
 
-    function showPage(pageId) {
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
 
-        pages.forEach(page => {
+if (menuToggle && navMenu) {
 
-            page.classList.remove(
-                "active-page"
+    menuToggle.addEventListener("click", function (e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isOpen = navMenu.classList.toggle("active");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+        console.log("MENU:", isOpen ? "TERBUKA" : "TERTUTUP");
+
+    });
+
+
+    /* Klik menu */
+
+    navMenu.querySelectorAll(".menu-link").forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            navMenu.classList.remove("active");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
             );
 
         });
 
-
-        const targetPage =
-            document.getElementById(pageId);
+    });
 
 
-        if (targetPage) {
+    /* Klik di luar */
 
-            targetPage.classList.add(
-                "active-page"
+    document.addEventListener("click", function (e) {
+
+        if (
+            !navMenu.contains(e.target) &&
+            !menuToggle.contains(e.target)
+        ) {
+
+            navMenu.classList.remove("active");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
             );
-
-            targetPage.scrollTop = 0;
 
         }
 
+    });
 
-        navLinks.forEach(link => {
-
-            link.classList.toggle(
-                "active",
-                link.dataset.page === pageId
-            );
-
-        });
-
-    }
+}
 
 
     /* =========================================
        LINK MENU
        ========================================= */
 
-    menuLinks.forEach(link => {
+    menuLinks.forEach(function (link) {
 
         link.addEventListener(
             "click",
@@ -195,6 +140,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 const pageId =
                     this.dataset.page;
+
 
                 if (pageId) {
 
@@ -235,18 +181,17 @@ document.addEventListener("DOMContentLoaded", async function () {
             ".nominal-btn"
         );
 
+
     const customAmount =
         document.getElementById(
             "customAmount"
         );
 
+
     const totalAmount =
         document.getElementById(
             "totalAmount"
         );
-
-
-    let selectedAmount = 0;
 
 
     function updateTotal() {
@@ -268,7 +213,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
 
-        if (!amount || amount < 0) {
+        if (
+            !amount ||
+            amount < 0
+        ) {
 
             amount = 0;
 
@@ -285,14 +233,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
 
-    nominalButtons.forEach(button => {
+    /* =========================================
+       TOMBOL NOMINAL
+       ========================================= */
+
+    nominalButtons.forEach(function (button) {
 
         button.addEventListener(
             "click",
             function () {
 
+
                 nominalButtons.forEach(
-                    btn => {
+                    function (btn) {
 
                         btn.classList.remove(
                             "selected"
@@ -331,14 +284,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
 
+    /* =========================================
+       NOMINAL CUSTOM
+       ========================================= */
+
     if (customAmount) {
 
         customAmount.addEventListener(
             "input",
             function () {
 
+
                 nominalButtons.forEach(
-                    btn => {
+                    function (btn) {
 
                         btn.classList.remove(
                             "selected"
@@ -359,21 +317,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =========================================
-       DATA DONASI
-       FIRESTORE ONLINE
-       ========================================= */
-
-    let donations = [];
-
-
-    const donationList =
-        document.getElementById(
-            "donationList"
-        );
-
-
-    /* =========================================
-       DASHBOARD BERANDA
+       DASHBOARD
        ========================================= */
 
     const totalDonatur =
@@ -381,10 +325,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             "totalDonatur"
         );
 
+
     const totalDana =
         document.getElementById(
             "totalDana"
         );
+
 
     const totalProgram =
         document.getElementById(
@@ -393,7 +339,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =========================================
-       DASHBOARD TRANSPARANSI
+       TRANSPARANSI
        ========================================= */
 
     const transparencyDonatur =
@@ -401,10 +347,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             ".transparency-total-donatur"
         );
 
+
     const transparencyDana =
         document.querySelector(
             ".transparency-total-dana"
         );
+
 
     const transparencyProgram =
         document.querySelector(
@@ -424,11 +372,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const jumlahDana =
             donations.reduce(
-                (total, donation) =>
-                    total +
-                    Number(
-                        donation.amount || 0
-                    ),
+                function (total, donation) {
+
+                    return total +
+                        Number(
+                            donation.amount || 0
+                        );
+
+                },
                 0
             );
 
@@ -436,17 +387,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         const programUnik =
             new Set(
                 donations
-                    .map(
-                        donation =>
-                            donation.program
-                    )
+                    .map(function (donation) {
+
+                        return donation.program;
+
+                    })
                     .filter(Boolean)
             );
 
 
-        /* =========================================
-           BERANDA
-           ========================================= */
+        /* BERANDA */
 
         if (totalDonatur) {
 
@@ -478,9 +428,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
 
-        /* =========================================
-           TRANSPARANSI
-           ========================================= */
+        /* TRANSPARANSI */
 
         if (transparencyDonatur) {
 
@@ -514,6 +462,12 @@ document.addEventListener("DOMContentLoaded", async function () {
        TABEL DONASI
        ========================================= */
 
+    const donationList =
+        document.getElementById(
+            "donationList"
+        );
+
+
     function renderDonations() {
 
         if (!donationList) return;
@@ -542,7 +496,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
         donations.forEach(
-            donation => {
+            function (donation) {
 
                 const row =
                     document.createElement(
@@ -588,87 +542,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =========================================
-       REALTIME FIRESTORE
-       ========================================= */
-
-    try {
-
-        const donationsRef =
-            window.firebaseCollection(
-                window.firebaseDB,
-                "donations"
-            );
-
-
-        const donationsQuery =
-            window.firebaseQuery(
-                donationsRef,
-                window.firebaseOrderBy(
-                    "createdAt",
-                    "desc"
-                )
-            );
-
-
-        window.firebaseOnSnapshot(
-            donationsQuery,
-            snapshot => {
-
-                donations =
-                    snapshot.docs.map(
-                        doc => ({
-                            id: doc.id,
-                            ...doc.data()
-                        })
-                    );
-
-
-                console.log(
-                    "Data donasi diperbarui:",
-                    donations
-                );
-
-
-                renderDonations();
-
-                updateDashboard();
-
-            },
-            error => {
-
-                console.error(
-                    "Gagal mengambil data donasi:",
-                    error
-                );
-
-            }
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Realtime database error:",
-            error
-        );
-
-    }
-
-
-    /* =========================================
-       FORM DONASI
-       ========================================= */
-
-    const donationForm =
-        document.getElementById(
-            "donationForm"
-        );
-
-
-    let currentDonation = null;
-
-
-    /* =========================================
-       BUAT MODAL QRIS
+       CREATE QRIS MODAL
        ========================================= */
 
     function createQRISModal() {
@@ -709,16 +583,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                     ×
                 </button>
 
-
                 <div class="qris-icon">
                     💳
                 </div>
 
-
                 <h2>
                     Pembayaran QRIS
                 </h2>
-
 
                 <p
                     class="qris-program"
@@ -726,13 +597,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                     Program
                 </p>
 
-
                 <div
                     class="qris-amount"
                     id="qrisAmount">
                     Rp0
                 </div>
-
 
                 <div class="qris-image">
 
@@ -741,7 +610,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                         alt="QRIS Pembayaran"
                         onerror="
                             this.style.display='none';
-
                             this.parentElement.innerHTML =
                             '<p style=&quot;
                             color:#718078;
@@ -757,12 +625,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 </div>
 
-
                 <p class="qris-instruction">
                     Scan kode QRIS menggunakan aplikasi
                     pembayaran yang mendukung QRIS.
                 </p>
-
 
                 <div class="qris-status">
 
@@ -771,7 +637,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     Menunggu pembayaran...
 
                 </div>
-
 
                 <button
                     type="button"
@@ -790,9 +655,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         );
 
 
-        /* =========================================
-           TOMBOL X
-           ========================================= */
+        /* CLOSE */
 
         const closeButton =
             document.getElementById(
@@ -804,31 +667,25 @@ document.addEventListener("DOMContentLoaded", async function () {
             "click",
             function () {
 
-                modal.classList.remove(
-                    "show"
-                );
-
-                modal.style.display = "";
+                modal.style.display =
+                    "none";
 
             }
         );
 
 
-        /* =========================================
-           KLIK LUAR MODAL
-           ========================================= */
+        /* KLIK LUAR */
 
         modal.addEventListener(
             "click",
             function (e) {
 
-                if (e.target === modal) {
+                if (
+                    e.target === modal
+                ) {
 
-                    modal.classList.remove(
-                        "show"
-                    );
-
-                    modal.style.display = "";
+                    modal.style.display =
+                        "none";
 
                 }
 
@@ -836,9 +693,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         );
 
 
-        /* =========================================
-           TOMBOL SUDAH MEMBAYAR
-           ========================================= */
+        /* PAID */
 
         const paidButton =
             document.getElementById(
@@ -858,8 +713,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =========================================
-       SUBMIT FORM DONASI
+       FORM DONASI
        ========================================= */
+
+    const donationForm =
+        document.getElementById(
+            "donationForm"
+        );
+
 
     if (donationForm) {
 
@@ -895,17 +756,24 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
                 const nama =
-                    namaInput.value.trim();
+                    namaInput
+                        ? namaInput.value.trim()
+                        : "";
 
 
                 const jenis =
-                    jenisInput.options[
-                        jenisInput.selectedIndex
-                    ].text;
+                    jenisInput &&
+                    jenisInput.selectedIndex >= 0
+                        ? jenisInput.options[
+                            jenisInput.selectedIndex
+                        ].text
+                        : "-";
 
 
                 const program =
-                    programInput.value;
+                    programInput
+                        ? programInput.value
+                        : "-";
 
 
                 let amount =
@@ -925,9 +793,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
 
 
-                /* =========================================
-                   VALIDASI NAMA
-                   ========================================= */
+                /* VALIDASI */
 
                 if (!nama) {
 
@@ -935,16 +801,16 @@ document.addEventListener("DOMContentLoaded", async function () {
                         "Silakan masukkan nama donatur."
                     );
 
-                    namaInput.focus();
+                    if (namaInput) {
+
+                        namaInput.focus();
+
+                    }
 
                     return;
 
                 }
 
-
-                /* =========================================
-                   VALIDASI NOMINAL
-                   ========================================= */
 
                 if (
                     !amount ||
@@ -960,10 +826,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
 
 
-                /* =========================================
-                   NAMA
-                   ========================================= */
-
                 const displayName =
                     anonymousInput &&
                     anonymousInput.checked
@@ -971,9 +833,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         : nama;
 
 
-                /* =========================================
-                   DATA SEMENTARA
-                   ========================================= */
+                /* DATA */
 
                 currentDonation = {
 
@@ -995,9 +855,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 };
 
 
-                /* =========================================
-                   ISI DATA QRIS
-                   ========================================= */
+                /* QRIS */
 
                 const modal =
                     document.getElementById(
@@ -1005,30 +863,42 @@ document.addEventListener("DOMContentLoaded", async function () {
                     );
 
 
-                document.getElementById(
-                    "qrisProgram"
-                ).textContent =
-                    `${jenis} • ${program}`;
-
-
-                document.getElementById(
-                    "qrisAmount"
-                ).textContent =
-                    formatRupiah(
-                        amount
+                const qrisProgram =
+                    document.getElementById(
+                        "qrisProgram"
                     );
 
 
-                /* =========================================
-                   TAMPILKAN QRIS
-                   ========================================= */
+                const qrisAmount =
+                    document.getElementById(
+                        "qrisAmount"
+                    );
 
-                modal.classList.add(
-                    "show"
-                );
 
-                modal.style.display =
-                    "flex";
+                if (qrisProgram) {
+
+                    qrisProgram.textContent =
+                        `${jenis} • ${program}`;
+
+                }
+
+
+                if (qrisAmount) {
+
+                    qrisAmount.textContent =
+                        formatRupiah(
+                            amount
+                        );
+
+                }
+
+
+                if (modal) {
+
+                    modal.style.display =
+                        "flex";
+
+                }
 
             }
         );
@@ -1053,53 +923,53 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
 
-        /* =========================================
-           UBAH STATUS
-           ========================================= */
+        if (!db) {
+
+            alert(
+                "Firebase masih belum terhubung. Tunggu sebentar lalu coba lagi."
+            );
+
+            return;
+
+        }
+
 
         currentDonation.status =
             "Selesai";
 
 
-        /* =========================================
-           SIMPAN KE FIREBASE
-           ========================================= */
-
         try {
-
-            const donationData = {
-
-                nama:
-                    currentDonation.nama,
-
-                jenis:
-                    currentDonation.jenis,
-
-                program:
-                    currentDonation.program,
-
-                amount:
-                    Number(
-                        currentDonation.amount
-                    ),
-
-                status:
-                    "Selesai",
-
-                createdAt:
-                    Date.now()
-
-            };
-
 
             await window.firebaseAddDoc(
 
                 window.firebaseCollection(
-                    window.firebaseDB,
+                    db,
                     "donations"
                 ),
 
-                donationData
+                {
+
+                    nama:
+                        currentDonation.nama,
+
+                    jenis:
+                        currentDonation.jenis,
+
+                    program:
+                        currentDonation.program,
+
+                    amount:
+                        Number(
+                            currentDonation.amount
+                        ),
+
+                    status:
+                        "Selesai",
+
+                    createdAt:
+                        Date.now()
+
+                }
 
             );
 
@@ -1126,9 +996,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
 
-        /* =========================================
-           TUTUP QRIS
-           ========================================= */
+        /* TUTUP MODAL */
 
         const modal =
             document.getElementById(
@@ -1138,19 +1006,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         if (modal) {
 
-            modal.classList.remove(
-                "show"
-            );
-
             modal.style.display =
                 "none";
 
         }
 
 
-        /* =========================================
-           RESET FORM
-           ========================================= */
+        /* RESET */
 
         if (donationForm) {
 
@@ -1163,7 +1025,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
         nominalButtons.forEach(
-            button => {
+            function (button) {
 
                 button.classList.remove(
                     "selected"
@@ -1176,16 +1038,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         updateTotal();
 
 
-        /* =========================================
-           HAPUS DATA SEMENTARA
-           ========================================= */
-
         currentDonation = null;
 
 
-        /* =========================================
-           PINDAH KE TRANSPARANSI
-           ========================================= */
+        /* TRANSPARANSI */
 
         showPage(
             "transparansi"
@@ -1200,14 +1056,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =========================================
-       ESC UNTUK TUTUP QRIS
+       ESC CLOSE QRIS
        ========================================= */
 
     document.addEventListener(
         "keydown",
         function (e) {
 
-            if (e.key === "Escape") {
+            if (
+                e.key === "Escape"
+            ) {
 
                 const modal =
                     document.getElementById(
@@ -1217,12 +1075,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 if (modal) {
 
-                    modal.classList.remove(
-                        "show"
-                    );
-
                     modal.style.display =
-                        "";
+                        "none";
 
                 }
 
@@ -1240,4 +1094,378 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     updateDashboard();
 
+
+    /* =========================================
+       FIREBASE
+       DIMULAI SETELAH MENU AKTIF
+       ========================================= */
+
+    initializeFirebase();
+
+
 });
+
+
+/* =========================================
+   FIREBASE INITIALIZATION
+   ========================================= */
+
+async function initializeFirebase() {
+
+    try {
+
+        const {
+            initializeApp
+        } =
+            await import(
+                "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js"
+            );
+
+
+        const {
+            getFirestore,
+            collection,
+            addDoc,
+            onSnapshot
+        } =
+            await import(
+                "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
+            );
+
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        db =
+            getFirestore(
+                app
+            );
+
+
+        /* GLOBAL */
+
+        window.firebaseDB =
+            db;
+
+        window.firebaseCollection =
+            collection;
+
+        window.firebaseAddDoc =
+            addDoc;
+
+        window.firebaseOnSnapshot =
+            onSnapshot;
+
+
+        console.log(
+            "Firebase berhasil terhubung."
+        );
+
+
+        /* =========================================
+           REALTIME DONASI
+           ========================================= */
+
+        const donationsRef =
+            collection(
+                db,
+                "donations"
+            );
+
+
+        onSnapshot(
+            donationsRef,
+
+            function (snapshot) {
+
+                console.log(
+                    "JUMLAH DATA FIRESTORE:",
+                    snapshot.size
+                );
+
+
+                donations =
+                    snapshot.docs.map(
+                        function (doc) {
+
+                            return {
+                                id: doc.id,
+                                ...doc.data()
+                            };
+
+                        }
+                    );
+
+
+                renderDonationsGlobal();
+
+                updateDashboardGlobal();
+
+            },
+
+            function (error) {
+
+                console.error(
+                    "ERROR FIRESTORE:",
+                    error
+                );
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Firebase gagal terhubung:",
+            error
+        );
+
+        console.warn(
+            "Menu website tetap aktif walaupun Firebase gagal."
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   GLOBAL RENDER DONASI
+   ========================================= */
+
+function renderDonationsGlobal() {
+
+    const donationList =
+        document.getElementById(
+            "donationList"
+        );
+
+
+    if (!donationList) return;
+
+
+    donationList.innerHTML = "";
+
+
+    if (
+        !donations ||
+        donations.length === 0
+    ) {
+
+        donationList.innerHTML = `
+            <tr>
+                <td colspan="5"
+                    style="
+                        text-align:center;
+                        color:#7b877f;
+                    ">
+                    Belum ada donasi terbaru.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    donations.forEach(
+        function (donation) {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+                <td>
+                    ${donation.nama || "-"}
+                </td>
+
+                <td>
+                    ${donation.jenis || "-"}
+                </td>
+
+                <td>
+                    ${donation.program || "-"}
+                </td>
+
+                <td>
+                    ${formatRupiahGlobal(
+                        donation.amount
+                    )}
+                </td>
+
+                <td>
+                    <span class="status">
+                        ${donation.status || "Selesai"}
+                    </span>
+                </td>
+            `;
+
+
+            donationList.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   GLOBAL DASHBOARD
+   ========================================= */
+
+function updateDashboardGlobal() {
+
+    const totalDonatur =
+        document.getElementById(
+            "totalDonatur"
+        );
+
+
+    const totalDana =
+        document.getElementById(
+            "totalDana"
+        );
+
+
+    const totalProgram =
+        document.getElementById(
+            "totalProgram"
+        );
+
+
+    const transparencyDonatur =
+        document.querySelector(
+            ".transparency-total-donatur"
+        );
+
+
+    const transparencyDana =
+        document.querySelector(
+            ".transparency-total-dana"
+        );
+
+
+    const transparencyProgram =
+        document.querySelector(
+            ".transparency-total-program"
+        );
+
+
+    const jumlahDonatur =
+        donations.length;
+
+
+    const jumlahDana =
+        donations.reduce(
+            function (total, donation) {
+
+                return total +
+                    Number(
+                        donation.amount || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const programUnik =
+        new Set(
+            donations
+                .map(
+                    function (donation) {
+
+                        return donation.program;
+
+                    }
+                )
+                .filter(Boolean)
+        );
+
+
+    if (totalDonatur) {
+
+        totalDonatur.textContent =
+            jumlahDonatur > 0
+                ? jumlahDonatur + "+"
+                : "0";
+
+    }
+
+
+    if (totalDana) {
+
+        totalDana.textContent =
+            formatRupiahGlobal(
+                jumlahDana
+            );
+
+    }
+
+
+    if (totalProgram) {
+
+        totalProgram.textContent =
+            programUnik.size > 0
+                ? programUnik.size + "+"
+                : "0";
+
+    }
+
+
+    if (transparencyDonatur) {
+
+        transparencyDonatur.textContent =
+            jumlahDonatur;
+
+    }
+
+
+    if (transparencyDana) {
+
+        transparencyDana.textContent =
+            formatRupiahGlobal(
+                jumlahDana
+            );
+
+    }
+
+
+    if (transparencyProgram) {
+
+        transparencyProgram.textContent =
+            programUnik.size;
+
+    }
+
+}
+
+
+/* =========================================
+   GLOBAL FORMAT RUPIAH
+   ========================================= */
+
+function formatRupiahGlobal(number) {
+
+    return new Intl.NumberFormat(
+        "id-ID",
+        {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0
+        }
+    ).format(
+        Number(number) || 0
+    );
+
+}

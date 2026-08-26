@@ -1,10 +1,12 @@
-/* =========================================
-   ZISWAF DIGITAL - STYLE.CSS
-   VERSI FIX SCROLL + RESPONSIVE
-   ========================================= */
+/* =========================================================
+   ZISWAF DIGITAL
+   STYLE.CSS - FIX FULL RESPONSIVE
+   ========================================================= */
 
 
-/* ---------- RESET ---------- */
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
     margin: 0;
@@ -15,6 +17,7 @@
 html {
     width: 100%;
     min-height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -28,11 +31,8 @@ body {
 
     line-height: 1.6;
 
-    /* FIX SCROLL */
     overflow-x: hidden;
     overflow-y: auto;
-
-    display: block;
 }
 
 a {
@@ -46,56 +46,66 @@ select {
     font-family: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 .container {
     width: min(1120px, 92%);
-    margin: auto;
+    margin: 0 auto;
 }
 
 
-/* =========================================
+/* =========================================================
    NAVBAR
-   ========================================= */
+   ========================================================= */
 
 .navbar {
     width: 100%;
-
     height: 74px;
 
-    z-index: 1000;
+    position: relative;
+    z-index: 9990;
 
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.96);
 
     border-bottom: 1px solid #e7eee9;
 
     backdrop-filter: blur(12px);
-
-    position: relative;
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-content {
+    width: 100%;
     height: 74px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 30px;
+
+    position: relative;
+    z-index: 9991;
 }
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo {
     display: flex;
-
     align-items: center;
 
     gap: 9px;
 
     font-size: 20px;
-
     font-weight: 800;
 
     color: #123d2a;
+
+    flex-shrink: 0;
 }
 
 .logo-icon {
@@ -103,16 +113,16 @@ select {
     height: 38px;
 
     display: grid;
-
     place-items: center;
 
     border-radius: 12px;
 
     background: #0d8a55;
-
-    color: white;
+    color: #ffffff;
 
     font-size: 20px;
+
+    flex-shrink: 0;
 }
 
 .logo-highlight {
@@ -120,21 +130,21 @@ select {
 }
 
 
-/* =========================================
+/* =========================================================
    NAV MENU
-   ========================================= */
+   ========================================================= */
 
 .nav-menu {
     display: flex;
-
     align-items: center;
 
     gap: 28px;
+
+    position: relative;
 }
 
 .nav-menu a {
     font-size: 14px;
-
     font-weight: 600;
 
     color: #63766b;
@@ -148,38 +158,69 @@ select {
 }
 
 
-/* =========================================
-   HAMBURGER
-   ========================================= */
+/* =========================================================
+   MENU TOGGLE
+   ========================================================= */
 
 .menu-toggle {
     display: none;
 
+    width: 46px;
+    height: 46px;
+
+    padding: 0;
+
     border: none;
+    border-radius: 10px;
 
     background: transparent;
 
     color: #123d2a;
 
-    font-size: 28px;
-
+    font-size: 0;
     line-height: 1;
 
-    cursor: pointer;
+    text-align: center;
 
-    padding: 6px;
+    position: relative;
+    z-index: 99999;
+
+    pointer-events: auto;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Ubah ☰ dari HTML menjadi titik 3 vertikal */
+.menu-toggle::after {
+    content: "⋮";
+
+    display: block;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    line-height: 42px;
+
+    color: #123d2a;
+}
+
+.menu-toggle:hover {
+    background: #eef7f1;
+}
+
+.menu-toggle:active {
+    transform: scale(0.95);
 }
 
 
-/* =========================================
+/* =========================================================
    BUTTON
-   ========================================= */
+   ========================================================= */
 
 .btn {
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 8px;
@@ -190,9 +231,8 @@ select {
 
     border-radius: 12px;
 
-    font-weight: 700;
-
     font-size: 14px;
+    font-weight: 700;
 
     border: none;
 
@@ -203,8 +243,7 @@ select {
 
 .btn-primary {
     background: #0d8a55;
-
-    color: white;
+    color: #ffffff;
 
     box-shadow:
         0 10px 25px rgba(13, 138, 85, 0.18);
@@ -221,28 +260,53 @@ select {
 
     color: #17623f;
 
-    background: white;
+    background: #ffffff;
 }
 
 .btn-outline:hover {
     border-color: #0d8a55;
 
     color: #0d8a55;
+
+    background: #f5fbf7;
 }
 
 
-/* =========================================
+/* =========================================================
+   BADGE
+   ========================================================= */
+
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 12px;
+
+    border-radius: 30px;
+
+    background: #e7f7ee;
+
+    color: #087447;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
    SISTEM HALAMAN
-   ========================================= */
+   ========================================================= */
 
 .page-container {
     width: 100%;
-
     min-height: calc(100vh - 74px);
 
     position: relative;
 
-    /* FIX SCROLL */
     overflow: visible;
 }
 
@@ -251,13 +315,10 @@ select {
 
     width: 100%;
 
-    /* FIX SCROLL */
-    height: auto;
     min-height: auto;
+    height: auto;
 
     overflow: visible;
-
-    overflow-x: hidden;
 }
 
 .page.active-page {
@@ -265,12 +326,13 @@ select {
 }
 
 
+/* =========================================================
+   HERO
+   ========================================================= */
 
-
-/* =========================================
-   HERO - BERANDA
-   ========================================= */
 .hero {
+    width: 100%;
+
     position: relative;
 
     padding: 90px 0;
@@ -283,7 +345,10 @@ select {
 
     overflow: hidden;
 }
+
 .hero-content {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns: 1.15fr 0.85fr;
@@ -298,16 +363,20 @@ select {
     z-index: 2;
 }
 
+.hero-text {
+    min-width: 0;
+}
+
 .hero h1 {
     max-width: 700px;
+
+    margin: 18px 0 24px;
 
     font-size: clamp(40px, 5vw, 65px);
 
     line-height: 1.08;
 
     letter-spacing: -2px;
-
-    margin-bottom: 24px;
 
     color: #123d2a;
 }
@@ -348,6 +417,8 @@ select {
     display: flex;
 
     flex-direction: column;
+
+    min-width: 0;
 }
 
 .trust-item strong {
@@ -363,29 +434,32 @@ select {
 }
 
 
-/* =========================================
+/* =========================================================
    HERO CARD
-   ========================================= */
+   ========================================================= */
 
 .hero-card {
+    width: 100%;
+
     padding: 32px;
 
     border-radius: 25px;
 
-    background: white;
+    background: #ffffff;
 
     border: 1px solid #e1ebe5;
 
     box-shadow:
-        0 25px 70px rgba(25, 76, 50, 0.1);
+        0 25px 70px rgba(25, 76, 50, 0.10);
 }
 
 .card-top {
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
+
+    gap: 15px;
 
     margin-bottom: 30px;
 }
@@ -395,7 +469,6 @@ select {
     height: 55px;
 
     display: grid;
-
     place-items: center;
 
     border-radius: 17px;
@@ -403,6 +476,8 @@ select {
     background: #e4f6ec;
 
     font-size: 27px;
+
+    flex-shrink: 0;
 }
 
 .verified {
@@ -417,6 +492,8 @@ select {
     font-size: 11px;
 
     font-weight: 700;
+
+    white-space: nowrap;
 }
 
 .hero-card h3 {
@@ -425,6 +502,8 @@ select {
     line-height: 1.2;
 
     margin-bottom: 14px;
+
+    color: #173b2b;
 }
 
 .hero-card p {
@@ -442,12 +521,15 @@ select {
 
     justify-content: space-between;
 
+    gap: 10px;
+
     margin-bottom: 9px;
 
     font-size: 12px;
 }
 
 .progress-bar {
+    width: 100%;
     height: 9px;
 
     background: #e8eee9;
@@ -459,7 +541,6 @@ select {
 
 .progress-value {
     width: 82%;
-
     height: 100%;
 
     background: #0d8a55;
@@ -480,7 +561,7 @@ select {
 
     background: #123d2a;
 
-    color: white;
+    color: #ffffff;
 
     font-size: 13px;
 
@@ -494,23 +575,26 @@ select {
 }
 
 
-/* =========================================
+/* =========================================================
    SECTION
-   ========================================= */
+   ========================================================= */
 
 .ziswaf-section,
 .donasi-section,
 .transparency-section,
 .about-section {
+    width: 100%;
+
     padding: 90px 0;
 
     min-height: 100%;
 }
 
 .section-heading {
-    text-align: center;
-
+    width: 100%;
     max-width: 650px;
+
+    text-align: center;
 
     margin: 0 auto 50px;
 }
@@ -537,14 +621,18 @@ select {
 
 .section-heading p {
     color: #738078;
+
+    font-size: 15px;
 }
 
 
-/* =========================================
+/* =========================================================
    ZISWAF CARD
-   ========================================= */
+   ========================================================= */
 
 .ziswaf-grid {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
@@ -553,9 +641,11 @@ select {
 }
 
 .ziswaf-card {
+    width: 100%;
+
     padding: 28px;
 
-    background: white;
+    background: #ffffff;
 
     border: 1px solid #e3ebe6;
 
@@ -576,7 +666,6 @@ select {
     height: 55px;
 
     display: grid;
-
     place-items: center;
 
     border-radius: 16px;
@@ -606,6 +695,8 @@ select {
     font-size: 20px;
 
     margin-bottom: 8px;
+
+    color: #173b2b;
 }
 
 .ziswaf-card p {
@@ -617,34 +708,27 @@ select {
 }
 
 .ziswaf-card a {
-    display: inline-block;
-
     margin-top: 17px;
-
-    color: #0d8a55;
-
-    font-size: 13px;
-
-    font-weight: 800;
 }
 
 
-/* =========================================
+/* =========================================================
    DONASI
-   ========================================= */
+   ========================================================= */
 
 .donasi-section {
     background: #eef7f1;
 }
 
 .donasi-box {
+    width: 100%;
     max-width: 700px;
 
-    margin: auto;
+    margin: 0 auto;
 
     padding: 35px;
 
-    background: white;
+    background: #ffffff;
 
     border-radius: 22px;
 
@@ -653,6 +737,8 @@ select {
 }
 
 .form-group {
+    width: 100%;
+
     margin-bottom: 22px;
 }
 
@@ -671,6 +757,7 @@ select {
 input,
 select {
     width: 100%;
+    max-width: 100%;
 
     height: 48px;
 
@@ -680,7 +767,7 @@ select {
 
     border-radius: 11px;
 
-    background: white;
+    background: #ffffff;
 
     outline: none;
 
@@ -698,6 +785,8 @@ select:focus {
 }
 
 .nominal-grid {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
@@ -708,6 +797,8 @@ select:focus {
 }
 
 .nominal-btn {
+    width: 100%;
+
     height: 45px;
 
     border: 1px solid #dbe8e0;
@@ -733,7 +824,7 @@ select:focus {
 
     border-color: #0d8a55;
 
-    color: white;
+    color: #ffffff;
 }
 
 .anonymous-option {
@@ -748,22 +839,29 @@ select:focus {
 
 .anonymous-option input {
     width: 17px;
-
     height: 17px;
+
+    flex-shrink: 0;
 }
 
 .anonymous-option label {
+    margin: 0;
+
     font-size: 12px;
 
     color: #718078;
 }
 
 .donation-summary {
+    width: 100%;
+
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
+
+    gap: 15px;
 
     padding: 18px;
 
@@ -791,15 +889,17 @@ select:focus {
 }
 
 
-/* =========================================
+/* =========================================================
    TRANSPARENCY
-   ========================================= */
+   ========================================================= */
 
 .transparency-section {
-    background: white;
+    background: #ffffff;
 }
 
 .transparency-grid {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
@@ -810,11 +910,15 @@ select:focus {
 }
 
 .stat-card {
+    width: 100%;
+
     padding: 25px;
 
     border: 1px solid #e3ebe6;
 
     border-radius: 18px;
+
+    background: #ffffff;
 }
 
 .stat-card > span {
@@ -835,9 +939,13 @@ select:focus {
     font-size: 23px;
 
     color: #123d2a;
+
+    word-break: break-word;
 }
 
 .transparency-table {
+    width: 100%;
+
     padding: 28px;
 
     border: 1px solid #e3ebe6;
@@ -846,23 +954,31 @@ select:focus {
 
     margin-bottom: 25px;
 
-    background: white;
+    background: #ffffff;
 }
 
 .transparency-table h3 {
     margin-bottom: 20px;
+
+    color: #173b2b;
 }
 
 .table-wrapper {
+    width: 100%;
+
     overflow-x: auto;
+
+    overflow-y: hidden;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
     width: 100%;
 
-    border-collapse: collapse;
-
     min-width: 650px;
+
+    border-collapse: collapse;
 }
 
 th,
@@ -884,7 +1000,13 @@ th {
     text-transform: uppercase;
 }
 
+td {
+    color: #43554b;
+}
+
 .status {
+    display: inline-block;
+
     padding: 5px 9px;
 
     border-radius: 30px;
@@ -899,17 +1021,27 @@ th {
 }
 
 
-/* =========================================
+/* =========================================================
    ABOUT
-   ========================================= */
+   ========================================================= */
 
 .about-section {
     background: #123d2a;
 
-    color: white;
+    color: #ffffff;
+}
+
+.about-section .section-heading h2 {
+    color: #ffffff;
+}
+
+.about-section .section-heading p {
+    color: #c0d2c8;
 }
 
 .about-content {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -917,8 +1049,6 @@ th {
     gap: 80px;
 
     align-items: center;
-
-    min-height: 100%;
 }
 
 .about-section h2 {
@@ -942,30 +1072,29 @@ th {
 }
 
 
-/* =========================================
+/* =========================================================
    FOOTER
-   ========================================= */
+   ========================================================= */
 
 footer {
     display: none;
 }
 
 
-/* =========================================
-   MODAL QRIS
-   ========================================= */
+/* =========================================================
+   QRIS MODAL
+   ========================================================= */
 
 .qris-modal {
     position: fixed;
 
     inset: 0;
 
-    z-index: 9999;
+    z-index: 99999;
 
     display: none;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 20px;
@@ -973,6 +1102,7 @@ footer {
     background: rgba(0, 0, 0, 0.55);
 
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 
     box-sizing: border-box;
 }
@@ -981,7 +1111,6 @@ footer {
     position: relative;
 
     width: 100%;
-
     max-width: 430px;
 
     max-height: 90vh;
@@ -1003,12 +1132,11 @@ footer {
 }
 
 
-/* =========================================
+/* =========================================================
    ANIMASI QRIS
-   ========================================= */
+   ========================================================= */
 
 @keyframes qrisPopup {
-
     from {
         opacity: 0;
 
@@ -1027,19 +1155,17 @@ footer {
 }
 
 
-/* =========================================
-   TOMBOL CLOSE
-   ========================================= */
+/* =========================================================
+   QRIS CLOSE
+   ========================================================= */
 
 .qris-close {
     position: absolute;
 
     top: 14px;
-
     right: 16px;
 
     width: 36px;
-
     height: 36px;
 
     border: none;
@@ -1066,13 +1192,12 @@ footer {
 }
 
 
-/* =========================================
-   ICON QRIS
-   ========================================= */
+/* =========================================================
+   QRIS ICON
+   ========================================================= */
 
 .qris-icon {
     width: 58px;
-
     height: 58px;
 
     margin: 0 auto 12px;
@@ -1080,7 +1205,6 @@ footer {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 16px;
@@ -1091,9 +1215,9 @@ footer {
 }
 
 
-/* =========================================
-   JUDUL QRIS
-   ========================================= */
+/* =========================================================
+   QRIS TITLE
+   ========================================================= */
 
 .qris-box h2 {
     margin: 0 0 8px;
@@ -1114,9 +1238,9 @@ footer {
 }
 
 
-/* =========================================
-   NOMINAL QRIS
-   ========================================= */
+/* =========================================================
+   QRIS NOMINAL
+   ========================================================= */
 
 .qris-amount {
     margin: 8px 0 20px;
@@ -1129,13 +1253,12 @@ footer {
 }
 
 
-/* =========================================
-   GAMBAR QRIS
-   ========================================= */
+/* =========================================================
+   QRIS IMAGE
+   ========================================================= */
 
 .qris-image {
     width: 100%;
-
     max-width: 300px;
 
     min-height: 300px;
@@ -1145,12 +1268,9 @@ footer {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 14px;
-
-    box-sizing: border-box;
 
     background: #ffffff;
 
@@ -1166,7 +1286,6 @@ footer {
     display: block;
 
     width: 100%;
-
     max-width: 270px;
 
     height: auto;
@@ -1177,9 +1296,9 @@ footer {
 }
 
 
-/* =========================================
-   INSTRUKSI
-   ========================================= */
+/* =========================================================
+   QRIS INSTRUCTION
+   ========================================================= */
 
 .qris-instruction {
     margin: 0 auto 16px;
@@ -1194,15 +1313,14 @@ footer {
 }
 
 
-/* =========================================
-   STATUS PEMBAYARAN
-   ========================================= */
+/* =========================================================
+   QRIS STATUS
+   ========================================================= */
 
 .qris-status {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 8px;
@@ -1222,7 +1340,6 @@ footer {
 
 .status-dot {
     width: 8px;
-
     height: 8px;
 
     border-radius: 50%;
@@ -1233,7 +1350,6 @@ footer {
 }
 
 @keyframes qrisPulse {
-
     0% {
         opacity: 1;
     }
@@ -1248,9 +1364,9 @@ footer {
 }
 
 
-/* =========================================
-   TOMBOL SUDAH MEMBAYAR
-   ========================================= */
+/* =========================================================
+   QRIS PAID
+   ========================================================= */
 
 .qris-paid {
     width: 100%;
@@ -1284,282 +1400,758 @@ footer {
 }
 
 
-/* =========================================
+/* =========================================================
    TABLET
-   ========================================= */
+   601px - 1024px
+   ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
 
-    .nav-menu {
-        display: none;
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        z-index: 99990;
+    }
+
+    .nav-content {
+        z-index: 99991;
     }
 
     .menu-toggle {
         display: block;
+
+        flex: 0 0 46px;
+
+        position: relative;
+
+        z-index: 99999;
     }
 
-    .hero-content {
-        grid-template-columns: 1fr;
+    .nav-menu {
+        display: none;
 
-        gap: 40px;
+        position: absolute;
 
-        padding-top: 30px;
+        top: calc(100% + 8px);
+        right: 0;
 
-        padding-bottom: 40px;
+        width: 230px;
+        max-width: calc(100vw - 24px);
 
-        min-height: auto;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 4px;
+
+        padding: 10px;
+
+        background: #ffffff;
+
+        border: 1px solid #e3ebe6;
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 15px 40px rgba(0, 0, 0, 0.15);
+
+        z-index: 99998;
+
+        pointer-events: auto;
     }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu a {
+        display: block;
+
+        width: 100%;
+
+        padding: 13px 15px;
+
+        border-radius: 10px;
+
+        color: #63766b;
+
+        pointer-events: auto;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background: #eaf6ef;
+
+        color: #0d8a55;
+    }
+
+
+    /* ---------- HERO ---------- */
 
     .hero {
         padding: 65px 0;
     }
 
+    .hero-content {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 35px;
+
+        min-height: auto;
+    }
+
+    .hero h1 {
+        font-size: clamp(36px, 5vw, 52px);
+    }
+
+
+    /* ---------- CARD ---------- */
+
+    .hero-card {
+        padding: 26px;
+    }
+
+
+    /* ---------- ZISWAF ---------- */
+
     .ziswaf-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+
+    /* ---------- TRANSPARENCY ---------- */
 
     .transparency-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .about-content {
-        grid-template-columns: 1fr;
 
-        gap: 30px;
+    /* ---------- ABOUT ---------- */
+
+    .about-content {
+        gap: 40px;
     }
+
 }
 
 
-/* =========================================
+/* =========================================================
    HP
-   ========================================= */
+   max 600px
+   ========================================================= */
 
 @media (max-width: 600px) {
 
-    html,
+    /* ---------- GLOBAL ---------- */
+
     body {
-        width: 100%;
-
-        min-height: 100%;
-
         overflow-x: hidden;
-
         overflow-y: auto;
     }
 
-    .page-container {
-        min-height: auto;
-
-        overflow: visible;
-    }
-
-    .page {
-        width: 100%;
-
-        height: auto;
-
-        min-height: auto;
-
-        overflow: visible;
-    }
-
     .container {
-        width: 90%;
+        width: calc(100% - 24px);
+        max-width: none;
     }
+
+
+    /* =====================================================
+       NAVBAR HP
+       ===================================================== */
 
     .navbar {
-        height: 65px;
+        width: 100%;
+
+        height: 68px;
+
+        z-index: 99990;
     }
 
     .nav-content {
-        height: 65px;
+        width: 100%;
+
+        height: 68px;
+
+        gap: 10px;
+
+        z-index: 99991;
     }
 
     .logo {
-        font-size: 17px;
+        min-width: 0;
+
+        font-size: 16px;
+
+        gap: 7px;
     }
 
     .logo-icon {
         width: 34px;
-
         height: 34px;
+
+        min-width: 34px;
+
+        border-radius: 10px;
+
+        font-size: 17px;
     }
 
     .menu-toggle {
         display: block;
 
-        font-size: 26px;
+        width: 46px;
+        height: 46px;
+
+        flex: 0 0 46px;
+
+        z-index: 99999;
     }
 
-    .nav-btn {
-        min-height: 40px;
+    .nav-menu {
+        top: calc(100% + 8px);
+        right: 0;
 
-        padding: 0 13px;
+        width: 220px;
+        max-width: calc(100vw - 24px);
 
-        font-size: 11px;
+        z-index: 99998;
     }
+
+
+    /* =====================================================
+       HERO HP
+       ===================================================== */
 
     .hero {
-        padding-top: 35px;
+        width: 100%;
 
-        padding-bottom: 50px;
+        padding: 35px 0 50px;
+
+        background-position: center;
+
+        overflow: hidden;
     }
 
     .hero-content {
+        display: block;
+
+        width: 100%;
+
         min-height: auto;
 
-        padding-top: 20px;
-
-        padding-bottom: 40px;
-
-        display: block;
+        padding: 20px 0 30px;
     }
 
-    .hero h1 {
-        font-size: 42px;
-
-        line-height: 1.08;
-
-        letter-spacing: -1.5px;
-    }
-
-    .hero-text > p {
-        font-size: 14px;
-
+    .hero-text {
+        width: 100%;
         max-width: 100%;
     }
 
+    .hero h1 {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: clamp(32px, 10vw, 42px);
+
+        line-height: 1.08;
+
+        letter-spacing: -1px;
+
+        margin: 16px 0 18px;
+    }
+
+    .hero-text > p {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+        margin-bottom: 24px;
+    }
+
+
+    /* =====================================================
+       HERO BUTTON
+       ===================================================== */
+
     .hero-buttons {
+        width: 100%;
+
+        display: flex;
+
         flex-direction: column;
 
-        width: 100%;
+        gap: 10px;
     }
 
     .hero-buttons .btn {
         width: 100%;
+
+        min-height: 46px;
+
+        white-space: nowrap;
     }
 
+
+    /* =====================================================
+       HERO TRUST
+       ===================================================== */
+
     .hero-trust {
-        gap: 20px;
+        width: 100%;
 
-        justify-content: space-between;
+        display: grid;
 
-        flex-wrap: wrap;
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 10px;
+
+        margin-top: 30px;
+    }
+
+    .trust-item {
+        min-width: 0;
     }
 
     .trust-item strong {
-        font-size: 16px;
+        font-size: 15px;
+
+        line-height: 1.3;
     }
 
     .trust-item span {
-        font-size: 10px;
+        font-size: 9px;
+
+        line-height: 1.4;
     }
 
-    .hero-card {
-        padding: 24px;
 
-        margin-top: 35px;
+    /* =====================================================
+       HERO CARD
+       ===================================================== */
+
+    .hero-card {
+        width: 100%;
+        max-width: 100%;
+
+        padding: 20px;
+
+        margin-top: 30px;
+
+        border-radius: 18px;
+    }
+
+    .card-top {
+        margin-bottom: 22px;
+    }
+
+    .card-top > span:first-child {
+        width: 48px;
+        height: 48px;
+
+        border-radius: 14px;
+
+        font-size: 23px;
+    }
+
+    .verified {
+        font-size: 10px;
+
+        padding: 5px 8px;
     }
 
     .hero-card h3 {
-        font-size: 24px;
+        font-size: 22px;
     }
+
+    .hero-card p {
+        font-size: 13px;
+    }
+
+
+    /* =====================================================
+       SECTION HP
+       ===================================================== */
 
     .ziswaf-section,
     .donasi-section,
     .transparency-section,
     .about-section {
-        padding: 65px 0;
+        width: 100%;
+
+        padding: 60px 0;
+
+        overflow: hidden;
     }
 
     .section-heading {
-        margin-bottom: 35px;
+        width: 100%;
+        max-width: 100%;
+
+        margin-bottom: 32px;
     }
 
     .section-heading h2 {
-        font-size: 29px;
+        font-size: clamp(26px, 8vw, 32px);
+
+        line-height: 1.2;
     }
 
     .section-heading p {
         font-size: 13px;
+
+        line-height: 1.7;
     }
 
+    .badge {
+        font-size: 10px;
+
+        padding: 6px 10px;
+    }
+
+
+    /* =====================================================
+       ZISWAF CARD HP
+       ===================================================== */
+
     .ziswaf-grid {
+        width: 100%;
+
         grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+    .ziswaf-card {
+        width: 100%;
+
+        padding: 22px;
+
+        border-radius: 17px;
+    }
+
+    .ziswaf-icon {
+        width: 50px;
+        height: 50px;
+
+        margin-bottom: 17px;
+
+        font-size: 22px;
+    }
+
+    .ziswaf-card h3 {
+        font-size: 18px;
     }
 
     .ziswaf-card p {
         min-height: auto;
+
+        font-size: 13px;
     }
 
+
+    /* =====================================================
+       DONASI HP
+       ===================================================== */
+
     .donasi-box {
-        padding: 22px;
+        width: 100%;
+        max-width: 100%;
+
+        padding: 20px 16px;
+
+        border-radius: 18px;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    input,
+    select {
+        width: 100%;
+        max-width: 100%;
+
+        height: 46px;
+
+        font-size: 14px;
     }
 
     .nominal-grid {
+        width: 100%;
+
         grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
     }
+
+    .nominal-btn {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 44px;
+
+        font-size: 11px;
+    }
+
+    .donation-summary {
+        width: 100%;
+
+        padding: 15px;
+
+        gap: 10px;
+    }
+
+    .donation-summary strong {
+        font-size: 18px;
+    }
+
+    .submit-btn {
+        width: 100%;
+
+        min-height: 46px;
+    }
+
+
+    /* =====================================================
+       TRANSPARENCY HP
+       ===================================================== */
 
     .transparency-grid {
+        width: 100%;
+
         grid-template-columns: 1fr;
+
+        gap: 12px;
     }
 
-    .transparency-table {
+    .stat-card {
+        width: 100%;
+
         padding: 20px;
     }
 
-    .about-section h2 {
-        font-size: 31px;
+    .transparency-table {
+        width: 100%;
+
+        padding: 16px;
+
+        border-radius: 17px;
+
+        overflow: hidden;
     }
+
+    .table-wrapper {
+        width: 100%;
+        max-width: 100%;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        width: 100%;
+
+        min-width: 650px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+
+        font-size: 12px;
+    }
+
+
+    /* =====================================================
+       ABOUT HP
+       ===================================================== */
 
     .about-content {
-        padding-top: 30px;
+        width: 100%;
 
-        padding-bottom: 30px;
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        padding: 20px 0;
+    }
+
+    .about-section h2 {
+        font-size: clamp(27px, 8vw, 32px);
+    }
+
+    .about-content p {
+        font-size: 14px;
     }
 
 
-    /* =====================================
+    /* =====================================================
        QRIS HP
-       ===================================== */
+       ===================================================== */
 
     .qris-modal {
-        padding: 15px;
+        padding: 12px;
     }
 
     .qris-box {
         width: 100%;
+        max-width: 100%;
 
         max-height: 92vh;
 
-        padding: 28px 18px 20px;
+        padding: 28px 15px 18px;
 
-        border-radius: 20px;
+        border-radius: 18px;
     }
 
-    .qris-image {
-        width: 200px;
+    .qris-close {
+        top: 10px;
+        right: 10px;
 
-        height: 200px;
+        width: 34px;
+        height: 34px;
 
-        min-height: 200px;
+        line-height: 34px;
+
+        font-size: 21px;
     }
 
-    .qris-image img {
-        max-width: 180px;
-    }
+    .qris-icon {
+        width: 50px;
+        height: 50px;
 
-    .qris-amount {
-        font-size: 25px;
+        font-size: 24px;
     }
 
     .qris-box h2 {
         font-size: 20px;
     }
 
+    .qris-program {
+        font-size: 13px;
+    }
+
+    .qris-amount {
+        font-size: 24px;
+
+        margin-bottom: 15px;
+    }
+
+    .qris-image {
+        width: min(200px, 70vw);
+        height: min(200px, 70vw);
+
+        min-height: 0;
+
+        padding: 10px;
+    }
+
+    .qris-image img {
+        width: 100%;
+
+        max-width: 180px;
+    }
+
+    .qris-instruction {
+        max-width: 100%;
+
+        font-size: 12px;
+    }
+
+    .qris-status {
+        font-size: 12px;
+
+        padding: 9px 10px;
+    }
+
     .qris-paid {
-        padding: 13px 15px;
+        width: 100%;
+
+        padding: 13px 12px;
 
         font-size: 13px;
     }
+
+}
+
+
+/* =========================================================
+   HP SANGAT KECIL
+   320px - 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .container {
+        width: calc(100% - 20px);
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .logo-icon {
+        width: 31px;
+        height: 31px;
+
+        min-width: 31px;
+
+        font-size: 15px;
+    }
+
+    .menu-toggle {
+        width: 42px;
+        height: 42px;
+
+        flex-basis: 42px;
+    }
+
+    .menu-toggle::after {
+        font-size: 30px;
+
+        line-height: 40px;
+    }
+
+    .nav-menu {
+        width: 210px;
+    }
+
+    .hero h1 {
+        font-size: 31px;
+    }
+
+    .hero-trust {
+        gap: 6px;
+    }
+
+    .trust-item strong {
+        font-size: 13px;
+    }
+
+    .trust-item span {
+        font-size: 8px;
+    }
+
+    .hero-card {
+        padding: 17px;
+    }
+
+    .donasi-box {
+        padding: 17px 13px;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+    .qris-box {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
 }
