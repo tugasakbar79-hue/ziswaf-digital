@@ -13,80 +13,71 @@
 <body>
 
     <!-- =====================================================
-     NAVBAR
-====================================================== -->
+         NAVBAR
+    ====================================================== -->
 
-<header class="navbar">
+    <header class="navbar">
 
-    <div class="container nav-content">
-
-        <a href="#"
-           class="logo menu-link"
-           data-page="beranda">
-
-            <span class="logo-icon">C</span>
-
-            <span>
-                ZISWAF<span class="logo-highlight">Digital</span>
-            </span>
-
-        </a>
-
-
-        <!-- TOMBOL HAMBURGER -->
-
-        <button
-            class="menu-toggle"
-            id="menuToggle"
-            type="button">
-            ☰
-        </button>
-
-
-        <!-- MENU -->
-
-        <nav class="nav-menu">
+        <div class="container nav-content">
 
             <a href="#"
-               class="menu-link active"
+               class="logo menu-link"
                data-page="beranda">
-                Beranda
+
+                <span class="logo-icon">C</span>
+
+                <span>
+                    ZISWAF<span class="logo-highlight">Digital</span>
+                </span>
+
             </a>
 
-            <a href="#"
-               class="menu-link"
-               data-page="program">
-                Program
-            </a>
+            <!-- TOMBOL MENU MOBILE -->
+            <button
+    class="menu-toggle"
+    id="menuToggle"
+    type="button"
+    aria-label="Buka menu"
+    aria-expanded="false">
+    ⋮
+</button>
 
-            <a href="#"
-               class="menu-link"
-               data-page="transparansi">
-                Transparansi
-            </a>
+            <!-- MENU -->
+            <nav class="nav-menu" id="navMenu">
 
-            <a href="#"
-               class="menu-link"
-               data-page="tentang">
-                Tentang
-            </a>
+                <a href="#"
+                   class="menu-link active"
+                   data-page="beranda">
+                    Beranda
+                </a>
 
-        </nav>
+                <a href="#"
+                   class="menu-link"
+                   data-page="program">
+                    Program
+                </a>
 
-    </div>
+                <a href="#"
+                   class="menu-link"
+                   data-page="transparansi">
+                    Transparansi
+                </a>
 
-</header>
+                <a href="#"
+                   class="menu-link"
+                   data-page="tentang">
+                    Tentang
+                </a>
 
+            </nav>
 
-<!-- =====================================================
-     MAIN
-====================================================== -->
+        </div>
 
-<main class="page-container">
+    </header>
 
 
     <!-- =====================================================
-         MAIN
+         PAGE CONTAINER
     ====================================================== -->
 
     <main class="page-container">
@@ -136,8 +127,6 @@
 
                     </div>
 
-
-                    <!-- STATISTIK BERANDA -->
 
                     <div class="hero-trust">
 
@@ -407,8 +396,6 @@
                     <form id="donationForm">
 
 
-                        <!-- NAMA -->
-
                         <div class="form-group">
 
                             <label for="nama">
@@ -420,13 +407,10 @@
                                 id="nama"
                                 name="nama"
                                 placeholder="Masukkan nama kamu"
-                                required
-                            >
+                                required>
 
                         </div>
 
-
-                        <!-- JENIS -->
 
                         <div class="form-group">
 
@@ -437,8 +421,7 @@
                             <select
                                 id="jenis"
                                 name="jenis"
-                                required
-                            >
+                                required>
 
                                 <option value="Zakat">
                                     Zakat
@@ -461,8 +444,6 @@
                         </div>
 
 
-                        <!-- PROGRAM -->
-
                         <div class="form-group">
 
                             <label for="program-select">
@@ -472,8 +453,7 @@
                             <select
                                 id="program-select"
                                 name="program"
-                                required
-                            >
+                                required>
 
                                 <option value="Pendidikan">
                                     Pendidikan
@@ -499,8 +479,6 @@
 
                         </div>
 
-
-                        <!-- NOMINAL -->
 
                         <div class="form-group">
 
@@ -540,20 +518,16 @@
                                 type="number"
                                 id="customAmount"
                                 placeholder="Atau masukkan nominal sendiri"
-                                min="1000"
-                            >
+                                min="1000">
 
                         </div>
 
-
-                        <!-- ANONIM -->
 
                         <div class="anonymous-option">
 
                             <input
                                 type="checkbox"
-                                id="anonymous"
-                            >
+                                id="anonymous">
 
                             <label for="anonymous">
                                 Sembunyikan nama saya
@@ -561,8 +535,6 @@
 
                         </div>
 
-
-                        <!-- TOTAL -->
 
                         <div class="donation-summary">
 
@@ -577,15 +549,14 @@
                         </div>
 
 
-                        <!-- SUBMIT -->
-
                         <button
                             type="submit"
                             class="btn btn-primary submit-btn">
+
                             Lanjutkan Pembayaran →
+
                         </button>
-                        
-                       
+
 
                     </form>
 
@@ -600,8 +571,9 @@
              TRANSPARANSI
         ================================================== -->
 
-        <section class="page transparency-section"
-                 id="transparansi">
+        <section
+            class="page transparency-section"
+            id="transparansi">
 
             <div class="container">
 
@@ -622,8 +594,6 @@
 
                 </div>
 
-
-                <!-- STATISTIK TRANSPARANSI -->
 
                 <div class="transparency-grid">
 
@@ -698,8 +668,6 @@
                 </div>
 
 
-                <!-- TABEL DONASI -->
-
                 <div class="transparency-table">
 
                     <h3>
@@ -742,7 +710,8 @@
 
                                 <tr>
 
-                                    <td colspan="5"
+                                    <td
+                                        colspan="5"
                                         style="
                                         text-align:center;
                                         color:#7b877f;
@@ -780,8 +749,9 @@
              TENTANG
         ================================================== -->
 
-        <section class="page about-section"
-                 id="tentang">
+        <section
+            class="page about-section"
+            id="tentang">
 
             <div class="container">
 
@@ -882,16 +852,10 @@
         </div>
 
     </footer>
-    
-   
-</div>
 
-        
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
-    
-
-
-   
