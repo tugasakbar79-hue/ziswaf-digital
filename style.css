@@ -190,7 +190,7 @@ button {
     -webkit-tap-highlight-color: transparent;
 }
 
-.menu-toggle::after {
+menu-toggle.::after {
     content: "☰";
 
     display: block;
@@ -1399,14 +1399,13 @@ footer {
 }
 
 
+
 /* =========================================================
    TABLET
-   601px - 1024px
+   max 1024px
    ========================================================= */
 
 @media (max-width: 1024px) {
-
-    /* ---------- NAVBAR ---------- */
 
     .navbar {
         z-index: 99990;
@@ -1418,11 +1417,8 @@ footer {
 
     .menu-toggle {
         display: block;
-
         flex: 0 0 46px;
-
         position: relative;
-
         z-index: 99999;
     }
 
@@ -1447,15 +1443,11 @@ footer {
         background: #ffffff;
 
         border: 1px solid #e3ebe6;
-
         border-radius: 14px;
 
-        box-shadow:
-            0 15px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 
         z-index: 99998;
-
-        pointer-events: auto;
     }
 
     .nav-menu.active {
@@ -1470,21 +1462,7 @@ footer {
         padding: 13px 15px;
 
         border-radius: 10px;
-
-        color: #63766b;
-
-        pointer-events: auto;
     }
-
-    .nav-menu a:hover,
-    .nav-menu a.active {
-        background: #eaf6ef;
-
-        color: #0d8a55;
-    }
-
-
-    /* ---------- HERO ---------- */
 
     .hero {
         padding: 65px 0;
@@ -1492,9 +1470,7 @@ footer {
 
     .hero-content {
         grid-template-columns: 1fr 1fr;
-
         gap: 35px;
-
         min-height: auto;
     }
 
@@ -1502,34 +1478,21 @@ footer {
         font-size: clamp(36px, 5vw, 52px);
     }
 
-
-    /* ---------- CARD ---------- */
-
     .hero-card {
         padding: 26px;
     }
-
-
-    /* ---------- ZISWAF ---------- */
 
     .ziswaf-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-
-    /* ---------- TRANSPARENCY ---------- */
-
     .transparency-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-
-    /* ---------- ABOUT ---------- */
-
     .about-content {
         gap: 40px;
     }
-
 }
 
 
@@ -1540,69 +1503,59 @@ footer {
 
 @media (max-width: 600px) {
 
-    /* ---------- GLOBAL ---------- */
-
     body {
         overflow-x: hidden;
-        overflow-y: auto;
     }
 
     .container {
-        width: calc(100% - 24px);
+        width: calc(100% - 32px);
         max-width: none;
     }
 
 
-    /* =====================================================
-       NAVBAR HP
-       ===================================================== */
+    /* NAVBAR */
 
-    .navbar {
-        width: 100%;
-
-        height: 68px;
-
-        z-index: 99990;
-    }
-
+    .navbar,
     .nav-content {
-        width: 100%;
-
-        height: 68px;
-
-        gap: 10px;
-
-        z-index: 99991;
+        height: 64px;
     }
 
     .logo {
-        min-width: 0;
-
-        font-size: 16px;
-
+        font-size: 15px;
         gap: 7px;
     }
 
     .logo-icon {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
 
-        min-width: 34px;
+        min-width: 32px;
 
         border-radius: 10px;
 
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .menu-toggle {
         display: block;
 
-        width: 46px;
-        height: 46px;
+        width: 44px;
+        height: 44px;
 
-        flex: 0 0 46px;
+        flex: 0 0 44px;
+    }
 
-        z-index: 99999;
+    .menu-toggle::after {
+        content: "☰";
+
+        display: block;
+
+        font-size: 26px;
+        font-weight: 800;
+
+        line-height: 44px;
+
+        color: #123d2a;
     }
 
     .nav-menu {
@@ -1610,24 +1563,16 @@ footer {
         right: 0;
 
         width: 220px;
-        max-width: calc(100vw - 24px);
+        max-width: calc(100vw - 32px);
 
         z-index: 99998;
     }
 
 
-    /* =====================================================
-       HERO HP
-       ===================================================== */
+    /* HERO */
 
     .hero {
-        width: 100%;
-
-        padding: 35px 0 50px;
-
-        background-position: center;
-
-        overflow: hidden;
+        padding: 25px 0 30px;
     }
 
     .hero-content {
@@ -1637,370 +1582,299 @@ footer {
 
         min-height: auto;
 
-        padding: 20px 0 30px;
+        padding: 10px 0 20px;
     }
 
     .hero-text {
         width: 100%;
-        max-width: 100%;
+    }
+
+    .badge {
+        padding: 5px 10px;
+
+        font-size: 9px;
     }
 
     .hero h1 {
         width: 100%;
-        max-width: 100%;
 
-        font-size: clamp(32px, 10vw, 42px);
+        font-size: 34px;
 
-        line-height: 1.08;
+        line-height: 1.12;
 
         letter-spacing: -1px;
 
-        margin: 16px 0 18px;
+        margin: 12px 0 14px;
     }
 
     .hero-text > p {
-        width: 100%;
-        max-width: 100%;
+        font-size: 13px;
 
-        font-size: 14px;
+        line-height: 1.65;
 
-        line-height: 1.7;
-
-        margin-bottom: 24px;
+        margin-bottom: 18px;
     }
 
 
-    /* =====================================================
-       HERO BUTTON
-       ===================================================== */
+    /* BUTTON */
 
     .hero-buttons {
         width: 100%;
 
-        display: flex;
-
         flex-direction: column;
 
-        gap: 10px;
+        gap: 8px;
     }
 
     .hero-buttons .btn {
         width: 100%;
 
-        min-height: 46px;
+        min-height: 42px;
 
-        white-space: nowrap;
+        padding: 0 16px;
+
+        font-size: 13px;
+
+        border-radius: 10px;
     }
 
 
-    /* =====================================================
-       HERO TRUST
-       ===================================================== */
+    /* STATISTIK */
 
     .hero-trust {
-        width: 100%;
-
-        display: grid;
-
         grid-template-columns: repeat(3, 1fr);
 
-        gap: 10px;
+        gap: 8px;
 
-        margin-top: 30px;
-    }
-
-    .trust-item {
-        min-width: 0;
+        margin-top: 24px;
     }
 
     .trust-item strong {
-        font-size: 15px;
-
-        line-height: 1.3;
+        font-size: 14px;
     }
 
     .trust-item span {
-        font-size: 9px;
-
-        line-height: 1.4;
+        font-size: 8px;
     }
 
 
-    /* =====================================================
-       HERO CARD
-       ===================================================== */
+    /* HERO CARD */
 
     .hero-card {
-        width: 100%;
-        max-width: 100%;
+        margin-top: 22px;
 
-        padding: 20px;
+        padding: 18px;
 
-        margin-top: 30px;
-
-        border-radius: 18px;
+        border-radius: 16px;
     }
 
     .card-top {
-        margin-bottom: 22px;
+        margin-bottom: 16px;
     }
 
     .card-top > span:first-child {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
 
-        border-radius: 14px;
-
-        font-size: 23px;
+        font-size: 21px;
     }
 
     .verified {
-        font-size: 10px;
+        font-size: 9px;
 
         padding: 5px 8px;
     }
 
     .hero-card h3 {
-        font-size: 22px;
+        font-size: 20px;
+
+        margin-bottom: 8px;
     }
 
     .hero-card p {
-        font-size: 13px;
+        font-size: 12px;
     }
 
 
-    /* =====================================================
-       SECTION HP
-       ===================================================== */
+    /* SECTION */
 
     .ziswaf-section,
     .donasi-section,
     .transparency-section,
     .about-section {
-        width: 100%;
-
-        padding: 60px 0;
-
-        overflow: hidden;
+        padding: 45px 0;
     }
 
     .section-heading {
-        width: 100%;
-        max-width: 100%;
+        margin-bottom: 24px;
+    }
 
-        margin-bottom: 32px;
+    .section-label {
+        font-size: 9px;
     }
 
     .section-heading h2 {
-        font-size: clamp(26px, 8vw, 32px);
+        font-size: 26px;
 
-        line-height: 1.2;
+        margin: 7px 0 8px;
     }
 
     .section-heading p {
-        font-size: 13px;
+        font-size: 12px;
 
-        line-height: 1.7;
-    }
-
-    .badge {
-        font-size: 10px;
-
-        padding: 6px 10px;
+        line-height: 1.6;
     }
 
 
-    /* =====================================================
-       ZISWAF CARD HP
-       ===================================================== */
+    /* ZISWAF CARD */
 
     .ziswaf-grid {
-        width: 100%;
-
         grid-template-columns: 1fr;
 
-        gap: 14px;
+        gap: 10px;
     }
 
     .ziswaf-card {
-        width: 100%;
+        padding: 18px;
 
-        padding: 22px;
-
-        border-radius: 17px;
+        border-radius: 15px;
     }
 
     .ziswaf-icon {
-        width: 50px;
-        height: 50px;
+        width: 44px;
+        height: 44px;
 
-        margin-bottom: 17px;
+        font-size: 20px;
 
-        font-size: 22px;
+        margin-bottom: 12px;
     }
 
     .ziswaf-card h3 {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .ziswaf-card p {
-        min-height: auto;
+        font-size: 12px;
 
-        font-size: 13px;
+        min-height: auto;
     }
 
 
-    /* =====================================================
-       DONASI HP
-       ===================================================== */
+    /* DONASI */
 
     .donasi-box {
-        width: 100%;
-        max-width: 100%;
+        padding: 18px 14px;
 
-        padding: 20px 16px;
-
-        border-radius: 18px;
+        border-radius: 16px;
     }
 
     .form-group {
-        width: 100%;
+        margin-bottom: 16px;
     }
 
     input,
     select {
-        width: 100%;
-        max-width: 100%;
+        height: 42px;
 
-        height: 46px;
-
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .nominal-grid {
-        width: 100%;
-
         grid-template-columns: repeat(2, 1fr);
 
         gap: 8px;
     }
 
     .nominal-btn {
-        width: 100%;
+        height: 40px;
 
-        min-width: 0;
+        font-size: 10px;
+    }
 
-        height: 44px;
-
-        font-size: 11px;
+    .anonymous-option {
+        margin: 16px 0;
     }
 
     .donation-summary {
-        width: 100%;
+        padding: 12px;
 
-        padding: 15px;
+        margin-bottom: 14px;
+    }
+
+    .donation-summary span {
+        font-size: 11px;
+    }
+
+    .donation-summary strong {
+        font-size: 17px;
+    }
+
+    .submit-btn {
+        min-height: 42px;
+    }
+
+
+    /* TRANSPARANSI */
+
+    .transparency-grid {
+        grid-template-columns: 1fr;
 
         gap: 10px;
     }
 
-    .donation-summary strong {
-        font-size: 18px;
-    }
-
-    .submit-btn {
-        width: 100%;
-
-        min-height: 46px;
-    }
-
-
-    /* =====================================================
-       TRANSPARENCY HP
-       ===================================================== */
-
-    .transparency-grid {
-        width: 100%;
-
-        grid-template-columns: 1fr;
-
-        gap: 12px;
-    }
-
     .stat-card {
-        width: 100%;
+        padding: 16px;
+    }
 
-        padding: 20px;
+    .stat-card > span {
+        font-size: 21px;
+    }
+
+    .stat-card h3 {
+        font-size: 19px;
+    }
+
+    .stat-card p {
+        margin-top: 8px;
+
+        font-size: 11px;
     }
 
     .transparency-table {
-        width: 100%;
+        padding: 14px;
 
-        padding: 16px;
-
-        border-radius: 17px;
-
-        overflow: hidden;
-    }
-
-    .table-wrapper {
-        width: 100%;
-        max-width: 100%;
-
-        overflow-x: auto;
-        overflow-y: hidden;
-
-        -webkit-overflow-scrolling: touch;
-    }
-
-    table {
-        width: 100%;
-
-        min-width: 650px;
-    }
-
-    th,
-    td {
-        padding: 12px;
-
-        font-size: 12px;
+        border-radius: 15px;
     }
 
 
-    /* =====================================================
-       ABOUT HP
-       ===================================================== */
+    /* ABOUT */
 
     .about-content {
-        width: 100%;
-
         grid-template-columns: 1fr;
 
-        gap: 25px;
+        gap: 18px;
 
-        padding: 20px 0;
+        padding: 10px 0;
     }
 
     .about-section h2 {
-        font-size: clamp(27px, 8vw, 32px);
+        font-size: 26px;
     }
 
     .about-content p {
-        font-size: 14px;
+        font-size: 13px;
+
+        margin-bottom: 12px;
     }
 
 
-    /* =====================================================
-       QRIS HP
-       ===================================================== */
+    /* QRIS */
 
     .qris-modal {
         padding: 12px;
     }
 
     .qris-box {
-        width: 100%;
-        max-width: 100%;
-
         max-height: 92vh;
 
         padding: 28px 15px 18px;
@@ -2008,23 +1882,11 @@ footer {
         border-radius: 18px;
     }
 
-    .qris-close {
-        top: 10px;
-        right: 10px;
-
-        width: 34px;
-        height: 34px;
-
-        line-height: 34px;
-
-        font-size: 21px;
-    }
-
     .qris-icon {
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
 
-        font-size: 24px;
+        font-size: 23px;
     }
 
     .qris-box h2 {
@@ -2032,100 +1894,67 @@ footer {
     }
 
     .qris-program {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .qris-amount {
-        font-size: 24px;
+        font-size: 22px;
 
-        margin-bottom: 15px;
+        margin-bottom: 14px;
     }
 
     .qris-image {
-        width: min(200px, 70vw);
-        height: min(200px, 70vw);
+        width: min(190px, 65vw);
+        height: min(190px, 65vw);
 
         min-height: 0;
 
-        padding: 10px;
+        padding: 8px;
     }
 
     .qris-image img {
-        width: 100%;
-
-        max-width: 180px;
+        max-width: 170px;
     }
 
     .qris-instruction {
-        max-width: 100%;
-
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .qris-status {
-        font-size: 12px;
+        padding: 8px 10px;
 
-        padding: 9px 10px;
+        font-size: 11px;
     }
 
     .qris-paid {
-        width: 100%;
-
-        padding: 13px 12px;
+        padding: 12px;
 
         font-size: 13px;
     }
-
 }
 
 
 /* =========================================================
-   HP SANGAT KECIL
-   320px - 360px
+   HP KECIL
+   max 360px
    ========================================================= */
 
 @media (max-width: 360px) {
 
     .container {
-        width: calc(100% - 20px);
+        width: calc(100% - 24px);
     }
 
     .logo {
         font-size: 14px;
     }
 
-    .logo-icon {
-        width: 31px;
-        height: 31px;
-
-        min-width: 31px;
-
-        font-size: 15px;
-    }
-
-    .menu-toggle {
-        width: 42px;
-        height: 42px;
-
-        flex-basis: 42px;
-    }
-
-    .menu-toggle::after {
-        font-size: 30px;
-
-        line-height: 40px;
-    }
-
-    .nav-menu {
-        width: 210px;
-    }
-
     .hero h1 {
-        font-size: 31px;
+        font-size: 30px;
     }
 
-    .hero-trust {
-        gap: 6px;
+    .hero-text > p {
+        font-size: 12px;
     }
 
     .trust-item strong {
@@ -2133,24 +1962,14 @@ footer {
     }
 
     .trust-item span {
-        font-size: 8px;
-    }
-
-    .hero-card {
-        padding: 17px;
-    }
-
-    .donasi-box {
-        padding: 17px 13px;
+        font-size: 7px;
     }
 
     .section-heading h2 {
-        font-size: 25px;
+        font-size: 24px;
     }
 
-    .qris-box {
-        padding-left: 12px;
-        padding-right: 12px;
+    .hero-card {
+        padding: 16px;
     }
-
 }
