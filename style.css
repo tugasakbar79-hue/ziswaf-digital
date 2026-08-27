@@ -190,13 +190,12 @@ button {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Ubah ☰ dari HTML menjadi titik 3 vertikal */
 .menu-toggle::after {
-    content: "⋮";
+    content: "☰";
 
     display: block;
 
-    font-size: 34px;
+    font-size: 28px;
     font-weight: 800;
 
     line-height: 42px;
