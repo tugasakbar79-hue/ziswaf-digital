@@ -1944,3 +1944,49 @@ footer {
         font-size: 12px;
     }
 }
+/* ================= STATISTIK HERO - TENGAH ================= */
+
+.hero-trust {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    margin-top: 42px;
+    width: 100%;
+}
+
+.trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+}
+
+
+/* ================= STATISTIK HERO HP ================= */
+
+@media (max-width: 600px) {
+    .hero-trust {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin-top: 18px;
+        width: 100%;
+    }
+
+    .trust-item {
+        align-items: center;
+        text-align: center;
+    }
+
+    .trust-item strong {
+        font-size: 13px;
+    }
+
+    .trust-item span {
+        font-size: 7px;
+    }
+}
