@@ -1469,3 +1469,54 @@ function formatRupiahGlobal(number) {
     );
 
 }
+/* =========================================
+   FUNGSI PINDAH HALAMAN
+   ========================================= */
+
+function showPage(pageId) {
+
+    const pages = document.querySelectorAll(".page");
+    const menuLinks = document.querySelectorAll(".menu-link");
+
+    // Sembunyikan semua halaman
+    pages.forEach(function (page) {
+        page.classList.remove("active-page");
+    });
+
+    // Tampilkan halaman yang dipilih
+    const targetPage = document.getElementById(pageId);
+
+    if (targetPage) {
+        targetPage.classList.add("active-page");
+    }
+
+    // Update menu aktif
+    menuLinks.forEach(function (link) {
+        link.classList.remove("active");
+
+        if (link.dataset.page === pageId) {
+            link.classList.add("active");
+        }
+    });
+
+    // Tutup menu HP
+    const navMenu = document.getElementById("navMenu");
+    const menuToggle = document.getElementById("menuToggle");
+
+    if (navMenu) {
+        navMenu.classList.remove("active");
+    }
+
+    if (menuToggle) {
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+    }
+
+    // Kembali ke atas
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
