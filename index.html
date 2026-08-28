@@ -2,70 +2,106 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ZISWAF Digital | Berbagi dengan Amanah</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>
+        ZISWAF Digital | Berbagi dengan Amanah
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
 </head>
+
 
 <body>
 
+
     <!-- =====================================================
          NAVBAR
-    ====================================================== -->
+         ===================================================== -->
 
     <header class="navbar">
 
-        <div class="container nav-content">
+        <div class="nav-content">
 
-            <a href="#"
-               class="logo menu-link"
-               data-page="beranda">
+            <a
+                href="#"
+                class="logo menu-link"
+                data-page="beranda">
 
-                <span class="logo-icon">C</span>
+                <span class="logo-icon">
+                    🤲
+                </span>
 
                 <span>
-                    ZISWAF<span class="logo-highlight">Digital</span>
+                    ZISWAF
+                    <span class="logo-highlight">
+                        Digital
+                    </span>
                 </span>
 
             </a>
 
-            <!-- TOMBOL MENU MOBILE -->
+
+            <!-- TOMBOL MENU HP -->
+
             <button
-                  class="menu-toggle"
-                 id="menuToggle"
                 type="button"
+                class="menu-toggle"
+                id="menuToggle"
                 aria-label="Buka menu"
-               aria-expanded="false">
-                  ☰
-</button>
+                aria-expanded="false">
+
+                ⋮
+
+            </button>
+
 
             <!-- MENU -->
-            <nav class="nav-menu" id="navMenu">
 
-                <a href="#"
-                   class="menu-link active"
-                   data-page="beranda">
+            <nav
+                class="nav-menu"
+                id="navMenu">
+
+                <a
+                    href="#"
+                    class="menu-link active"
+                    data-page="beranda">
                     Beranda
                 </a>
 
-                <a href="#"
-                   class="menu-link"
-                   data-page="program">
+                <a
+                    href="#"
+                    class="menu-link"
+                    data-page="program">
                     Program
                 </a>
 
-                <a href="#"
-                   class="menu-link"
-                   data-page="transparansi">
+                <a
+                    href="#"
+                    class="menu-link"
+                    data-page="donasi">
+                    Donasi
+                </a>
+
+                <a
+                    href="#"
+                    class="menu-link"
+                    data-page="transparansi">
                     Transparansi
                 </a>
 
-                <a href="#"
-                   class="menu-link"
-                   data-page="tentang">
+                <a
+                    href="#"
+                    class="menu-link"
+                    data-page="tentang">
                     Tentang
                 </a>
 
@@ -76,197 +112,261 @@
     </header>
 
 
+
     <!-- =====================================================
          PAGE CONTAINER
-    ====================================================== -->
+         ===================================================== -->
 
     <main class="page-container">
 
 
         <!-- =================================================
              BERANDA
-        ================================================== -->
+             ================================================= -->
 
-        <section class="page hero active-page" id="beranda">
+        <section
+            class="page active-page"
+            id="beranda">
 
-            <div class="container hero-content">
 
-                <div class="hero-text">
+            <div class="hero">
 
-                    <span class="badge">
-                        ✨ Platform ZISWAF Digital
-                    </span>
+                <div class="hero-content">
 
-                    <h1>
-                        Berbagi Kebaikan,
-                        <span>
-                            Lebih Mudah & Transparan.
+
+                    <div class="hero-text">
+
+
+                        <span class="badge">
+                            ZISWAF DIGITAL
+                            • AMANAH & TRANSPARAN
                         </span>
-                    </h1>
 
-                    <p>
-                        Tunaikan zakat, infak, sedekah,
-                        dan wakaf dengan mudah melalui
-                        platform digital yang aman,
-                        transparan, dan terpercaya.
-                    </p>
 
-                    <div class="hero-buttons">
+                        <h1>
 
-                        <a href="#"
-                           class="btn btn-primary menu-link"
-                           data-page="donasi">
-                            Mulai Berdonasi →
+                            Berbagi Kebaikan
+
+                            <span>
+                                Lebih Mudah & Amanah
+                            </span>
+
+                        </h1>
+
+
+                        <p>
+
+                            Platform digital untuk menyalurkan
+                            zakat, infak, sedekah, dan wakaf
+                            secara mudah, cepat, dan transparan.
+
+                        </p>
+
+
+                        <div class="hero-buttons">
+
+
+                            <a
+                                href="#"
+                                class="btn btn-primary menu-link"
+                                data-page="donasi">
+
+                                Mulai Berdonasi
+
+                            </a>
+
+
+                            <a
+                                href="#"
+                                class="btn btn-outline menu-link"
+                                data-page="transparansi">
+
+                                Lihat Transparansi
+
+                            </a>
+
+
+                        </div>
+
+
+
+                        <!-- STATISTIK BERANDA -->
+
+                        <div class="hero-trust">
+
+
+                            <div class="trust-item">
+
+                                <strong id="totalDonatur">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Donatur
+                                </span>
+
+                            </div>
+
+
+                            <div class="trust-item">
+
+                                <strong id="totalDana">
+                                    Rp0
+                                </strong>
+
+                                <span>
+                                    Total Dana
+                                </span>
+
+                            </div>
+
+
+                            <div class="trust-item">
+
+                                <strong id="totalProgram">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Program
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- CARD HERO -->
+
+                    <div class="hero-card">
+
+
+                        <div class="card-top">
+
+                            <span>
+                                🤲
+                            </span>
+
+                            <span class="verified">
+                                ✓ Terverifikasi
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+
+                            Satu Kebaikan,
+                            Banyak Manfaat
+
+                        </h3>
+
+
+                        <p>
+
+                            Setiap donasi yang kamu salurkan
+                            akan dicatat dan ditampilkan
+                            secara transparan.
+
+                        </p>
+
+
+                        <div class="mini-progress">
+
+                            <div class="progress-info">
+
+                                <span>
+                                    Semangat berbagi
+                                </span>
+
+                                <strong>
+                                    82%
+                                </strong>
+
+                            </div>
+
+
+                            <div class="progress-bar">
+
+                                <div class="progress-value"></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="#"
+                            class="card-button menu-link"
+                            data-page="donasi">
+
+                            Donasi Sekarang
+
                         </a>
 
-                        <a href="#"
-                           class="btn btn-outline menu-link"
-                           data-page="transparansi">
-                            Lihat Transparansi
-                        </a>
 
                     </div>
 
-
-                    <div class="hero-trust">
-
-                        <div class="trust-item">
-
-                            <strong id="totalDonatur">
-                                0
-                            </strong>
-
-                            <span>
-                                Donatur
-                            </span>
-
-                        </div>
-
-                        <div class="trust-item">
-
-                            <strong id="totalDana">
-                                Rp0
-                            </strong>
-
-                            <span>
-                                Dana Terkumpul
-                            </span>
-
-                        </div>
-
-                        <div class="trust-item">
-
-                            <strong id="totalProgram">
-                                0
-                            </strong>
-
-                            <span>
-                                Program
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- HERO CARD -->
-
-                <div class="hero-card">
-
-                    <div class="card-top">
-
-                        <span>
-                            🤲
-                        </span>
-
-                        <span class="verified">
-                            ✓ Terpercaya
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Satu Kebaikan,
-                        Banyak Manfaat.
-                    </h3>
-
-                    <p>
-                        Setiap kontribusi yang diberikan
-                        akan tercatat dan dapat dipantau
-                        melalui halaman transparansi.
-                    </p>
-
-                    <div class="mini-progress">
-
-                        <div class="progress-info">
-
-                            <span>
-                                Donasi bulan ini
-                            </span>
-
-                            <strong>
-                                82%
-                            </strong>
-
-                        </div>
-
-                        <div class="progress-bar">
-
-                            <div class="progress-value"></div>
-
-                        </div>
-
-                    </div>
-
-                    <a href="#"
-                       class="card-button menu-link"
-                       data-page="donasi">
-                        Salurkan Sekarang →
-                    </a>
 
                 </div>
 
             </div>
 
+
         </section>
+
 
 
         <!-- =================================================
              PROGRAM
-        ================================================== -->
+             ================================================= -->
 
-        <section class="page ziswaf-section" id="program">
+        <section
+            class="page"
+            id="program">
 
-            <div class="container">
+
+            <div class="ziswaf-section">
 
                 <div class="section-heading">
 
-                    <span class="badge">
-                        Program Kebaikan
+
+                    <span class="section-label">
+                        PROGRAM ZISWAF
                     </span>
 
+
                     <h2>
-                        Salurkan Kebaikanmu
+                        Pilih Cara Berbagi
                     </h2>
 
+
                     <p>
-                        Pilih program yang ingin kamu
-                        dukung dan bantu mereka yang
-                        membutuhkan.
+
+                        Salurkan kebaikan melalui
+                        berbagai bentuk ZISWAF.
+
                     </p>
 
+
                 </div>
+
 
 
                 <div class="ziswaf-grid">
 
 
+                    <!-- ZAKAT -->
+
                     <div class="ziswaf-card">
 
                         <div class="ziswaf-icon zakat-icon">
-                            🕌
+                            💰
                         </div>
 
                         <h3>
@@ -274,23 +374,32 @@
                         </h3>
 
                         <p>
-                            Tunaikan zakat untuk membantu
-                            masyarakat yang membutuhkan.
+
+                            Tunaikan kewajiban zakat
+                            untuk membantu mereka
+                            yang membutuhkan.
+
                         </p>
 
-                        <a href="#"
-                           class="btn btn-outline menu-link"
-                           data-page="donasi">
-                            Donasi →
+                        <a
+                            href="#"
+                            class="btn btn-outline menu-link"
+                            data-page="donasi">
+
+                            Tunaikan Zakat
+
                         </a>
 
                     </div>
 
 
+
+                    <!-- INFAK -->
+
                     <div class="ziswaf-card">
 
                         <div class="ziswaf-icon infak-icon">
-                            ❤️
+                            💙
                         </div>
 
                         <h3>
@@ -298,23 +407,32 @@
                         </h3>
 
                         <p>
-                            Salurkan infak untuk berbagai
-                            kegiatan sosial dan kemanusiaan.
+
+                            Berikan sebagian rezeki
+                            untuk mendukung berbagai
+                            kebutuhan sosial.
+
                         </p>
 
-                        <a href="#"
-                           class="btn btn-outline menu-link"
-                           data-page="donasi">
-                            Donasi →
+                        <a
+                            href="#"
+                            class="btn btn-outline menu-link"
+                            data-page="donasi">
+
+                            Berinfak
+
                         </a>
 
                     </div>
 
 
+
+                    <!-- SEDEKAH -->
+
                     <div class="ziswaf-card">
 
                         <div class="ziswaf-icon sedekah-icon">
-                            🤲
+                            ❤️
                         </div>
 
                         <h3>
@@ -322,18 +440,27 @@
                         </h3>
 
                         <p>
-                            Berbagi sebagian rezeki untuk
-                            memberikan manfaat bagi sesama.
+
+                            Tebarkan kebaikan melalui
+                            sedekah yang bermanfaat
+                            bagi sesama.
+
                         </p>
 
-                        <a href="#"
-                           class="btn btn-outline menu-link"
-                           data-page="donasi">
-                            Donasi →
+                        <a
+                            href="#"
+                            class="btn btn-outline menu-link"
+                            data-page="donasi">
+
+                            Bersedekah
+
                         </a>
 
                     </div>
 
+
+
+                    <!-- WAKAF -->
 
                     <div class="ziswaf-card">
 
@@ -346,61 +473,87 @@
                         </h3>
 
                         <p>
-                            Dukung program wakaf yang
-                            memberikan manfaat jangka panjang.
+
+                            Salurkan wakaf untuk
+                            manfaat yang terus
+                            berkembang.
+
                         </p>
 
-                        <a href="#"
-                           class="btn btn-outline menu-link"
-                           data-page="donasi">
-                            Donasi →
+                        <a
+                            href="#"
+                            class="btn btn-outline menu-link"
+                            data-page="donasi">
+
+                            Berwakaf
+
                         </a>
 
                     </div>
+
 
                 </div>
 
             </div>
 
+
         </section>
+
 
 
         <!-- =================================================
              DONASI
-        ================================================== -->
+             ================================================= -->
 
-        <section class="page donasi-section" id="donasi">
+        <section
+            class="page"
+            id="donasi">
 
-            <div class="container">
+
+            <div class="donasi-section">
+
 
                 <div class="section-heading">
 
-                    <span class="badge">
-                        Donasi Sekarang
+
+                    <span class="section-label">
+                        DONASI
                     </span>
+
 
                     <h2>
                         Salurkan Kebaikanmu
                     </h2>
 
+
                     <p>
-                        Isi data donasi kemudian lakukan
-                        pembayaran menggunakan QRIS.
+
+                        Isi data donasi dengan benar
+                        kemudian lanjutkan pembayaran
+                        melalui QRIS.
+
                     </p>
+
 
                 </div>
 
 
+
                 <div class="donasi-box">
+
 
                     <form id="donationForm">
 
 
+                        <!-- NAMA DONATUR -->
+
                         <div class="form-group">
+
 
                             <label for="nama">
                                 Nama Donatur
                             </label>
+
 
                             <input
                                 type="text"
@@ -409,191 +562,272 @@
                                 placeholder="Masukkan nama kamu"
                                 required>
 
+
                         </div>
 
 
+
+                        <!-- JENIS DONASI -->
+
                         <div class="form-group">
+
 
                             <label for="jenis">
                                 Jenis Donasi
                             </label>
+
 
                             <select
                                 id="jenis"
                                 name="jenis"
                                 required>
 
-                                <option value="Zakat">
+
+                                <option value="zakat">
                                     Zakat
                                 </option>
 
-                                <option value="Infak">
-                                    Infak
+
+                                <option value="infaq">
+                                    Infaq
                                 </option>
 
-                                <option value="Sedekah">
+
+                                <option value="sedekah">
                                     Sedekah
                                 </option>
 
-                                <option value="Wakaf">
+
+                                <option value="wakaf">
                                     Wakaf
                                 </option>
 
+
                             </select>
+
 
                         </div>
 
 
+
+                        <!-- PROGRAM -->
+
                         <div class="form-group">
+
 
                             <label for="program-select">
                                 Pilih Program
                             </label>
+
 
                             <select
                                 id="program-select"
                                 name="program"
                                 required>
 
+
                                 <option value="Pendidikan">
                                     Pendidikan
                                 </option>
+
 
                                 <option value="Kesehatan">
                                     Kesehatan
                                 </option>
 
+
+                                <option value="Santunan">
+                                    Santunan
+                                </option>
+
+
                                 <option value="Sosial">
                                     Sosial
                                 </option>
 
-                                <option value="Kemanusiaan">
-                                    Kemanusiaan
+
+                                <option value="Wakaf Produktif">
+                                    Wakaf Produktif
                                 </option>
 
-                                <option value="Masjid">
-                                    Pembangunan Masjid
-                                </option>
 
                             </select>
+
 
                         </div>
 
 
+
+                        <!-- NOMINAL -->
+
                         <div class="form-group">
 
+
                             <label>
-                                Pilih Nominal Donasi
+                                Nominal Donasi
                             </label>
+
 
                             <div class="nominal-grid">
 
+
                                 <button
                                     type="button"
                                     class="nominal-btn">
+
                                     Rp50.000
+
                                 </button>
+
 
                                 <button
                                     type="button"
                                     class="nominal-btn">
+
                                     Rp100.000
+
                                 </button>
+
 
                                 <button
                                     type="button"
                                     class="nominal-btn">
+
                                     Rp250.000
+
                                 </button>
+
 
                                 <button
                                     type="button"
                                     class="nominal-btn">
-                                    Rp400.000
+
+                                    Rp500.000
+
                                 </button>
+
 
                             </div>
+
+
 
                             <input
                                 type="number"
                                 id="customAmount"
-                                placeholder="Atau masukkan nominal sendiri"
-                                min="1000">
+                                name="customAmount"
+                                min="1000"
+                                step="1000"
+                                placeholder="Masukkan nominal sendiri">
+
 
                         </div>
 
+
+
+                        <!-- ANONIM -->
 
                         <div class="anonymous-option">
 
+
                             <input
                                 type="checkbox"
-                                id="anonymous">
+                                id="anonymous"
+                                name="anonymous">
+
 
                             <label for="anonymous">
+
                                 Sembunyikan nama saya
+                                sebagai "Hamba Allah"
+
                             </label>
+
 
                         </div>
 
 
+
+                        <!-- TOTAL -->
+
                         <div class="donation-summary">
+
 
                             <span>
                                 Total Donasi
                             </span>
 
+
                             <strong id="totalAmount">
                                 Rp0
                             </strong>
 
+
                         </div>
 
 
+
+                        <!-- SUBMIT -->
+
                         <button
                             type="submit"
-                            class="btn btn-primary submit-btn">
+                            class="submit-btn btn btn-primary">
 
-                            Lanjutkan Pembayaran →
+                            Lanjut ke Pembayaran QRIS
 
                         </button>
 
 
                     </form>
 
+
                 </div>
 
+
             </div>
+
 
         </section>
 
 
+
         <!-- =================================================
              TRANSPARANSI
-        ================================================== -->
+             ================================================= -->
 
         <section
-            class="page transparency-section"
+            class="page"
             id="transparansi">
 
-            <div class="container">
+
+            <div class="transparency-section">
+
 
                 <div class="section-heading">
 
-                    <span class="badge">
-                        Transparansi
+
+                    <span class="section-label">
+                        TRANSPARANSI
                     </span>
 
+
                     <h2>
-                        Transparansi Dana
+                        Transparansi Donasi
                     </h2>
 
+
                     <p>
-                        Semua donasi yang telah dikonfirmasi
-                        tercatat secara transparan.
+
+                        Data donasi ditampilkan secara
+                        terbuka dan realtime.
+
                     </p>
+
 
                 </div>
 
+
+
+                <!-- STATISTIK -->
 
                 <div class="transparency-grid">
 
@@ -615,6 +849,7 @@
                     </div>
 
 
+
                     <div class="stat-card">
 
                         <span>
@@ -622,7 +857,7 @@
                         </span>
 
                         <p>
-                            Dana Terkumpul
+                            Total Dana
                         </p>
 
                         <h3 class="transparency-total-dana">
@@ -632,14 +867,15 @@
                     </div>
 
 
+
                     <div class="stat-card">
 
                         <span>
-                            📋
+                            🎯
                         </span>
 
                         <p>
-                            Program
+                            Program Terdanai
                         </p>
 
                         <h3 class="transparency-total-program">
@@ -649,10 +885,11 @@
                     </div>
 
 
+
                     <div class="stat-card">
 
                         <span>
-                            ✓
+                            🤲
                         </span>
 
                         <p>
@@ -660,30 +897,38 @@
                         </p>
 
                         <h3>
-                            Transparan
+                            Amanah
                         </h3>
 
                     </div>
 
+
                 </div>
 
 
+
+                <!-- TABEL DONASI -->
+
                 <div class="transparency-table">
+
 
                     <h3>
                         Donasi Terbaru
                     </h3>
 
+
                     <div class="table-wrapper">
 
+
                         <table>
+
 
                             <thead>
 
                                 <tr>
 
                                     <th>
-                                        Donatur
+                                        Nama Donatur
                                     </th>
 
                                     <th>
@@ -706,16 +951,15 @@
 
                             </thead>
 
+
                             <tbody id="donationList">
+
 
                                 <tr>
 
                                     <td
                                         colspan="5"
-                                        style="
-                                        text-align:center;
-                                        color:#7b877f;
-                                        ">
+                                        style="text-align:center;">
 
                                         Belum ada donasi terbaru.
 
@@ -723,55 +967,59 @@
 
                                 </tr>
 
+
                             </tbody>
+
 
                         </table>
 
+
                     </div>
+
 
                 </div>
 
 
-                <a href="#"
-                   class="btn btn-primary menu-link"
-                   data-page="donasi">
-
-                    Mulai Berdonasi →
-
-                </a>
-
             </div>
+
 
         </section>
 
 
+
         <!-- =================================================
              TENTANG
-        ================================================== -->
+             ================================================= -->
 
         <section
-            class="page about-section"
+            class="page"
             id="tentang">
 
-            <div class="container">
+
+            <div class="about-section">
+
 
                 <div class="section-heading">
 
-                    <span class="badge">
-                        Tentang ZISWAF Digital
+
+                    <span class="section-label">
+                        TENTANG KAMI
                     </span>
 
+
                     <h2>
-                        Berbagi dengan Amanah
+                        ZISWAF Digital
                     </h2>
 
+
                     <p>
-                        ZISWAF Digital hadir untuk membuat
-                        proses zakat, infak, sedekah, dan
-                        wakaf menjadi lebih mudah.
+                        Berbagi dengan amanah melalui
+                        teknologi digital.
                     </p>
 
+
                 </div>
+
 
 
                 <div class="about-content">
@@ -779,56 +1027,53 @@
 
                     <div>
 
+
+                        <span class="section-label">
+                            ZISWAF DIGITAL
+                        </span>
+
+
                         <h2>
-                            Kebaikan yang Transparan
+                            Berbagi Kebaikan
+                            Lebih Mudah
                         </h2>
 
-                        <p>
-                            ZISWAF Digital merupakan platform
-                            sederhana untuk membantu masyarakat
-                            menyalurkan dana kebaikan secara
-                            digital.
-                        </p>
-
-                        <p>
-                            Setiap donasi yang telah dikonfirmasi
-                            akan dicatat dan ditampilkan pada
-                            halaman transparansi.
-                        </p>
 
                     </div>
 
 
-                    <div class="hero-card">
 
-                        <div class="card-top">
+                    <div>
 
-                            <span>
-                                🤲
-                            </span>
-
-                            <span class="verified">
-                                ✓ Amanah
-                            </span>
-
-                        </div>
-
-                        <h3>
-                            Satu Kebaikan,
-                            Banyak Manfaat.
-                        </h3>
 
                         <p>
-                            Bersama kita dapat memberikan
-                            manfaat yang lebih luas kepada
-                            masyarakat.
+
+                            ZISWAF Digital merupakan
+                            platform digital yang membantu
+                            masyarakat menyalurkan zakat,
+                            infak, sedekah, dan wakaf.
+
                         </p>
 
+
+                        <p>
+
+                            Dengan sistem digital,
+                            proses donasi menjadi lebih
+                            mudah dan data donasi dapat
+                            dipantau secara transparan.
+
+                        </p>
+
+
                     </div>
+
 
                 </div>
 
+
             </div>
+
 
         </section>
 
@@ -836,25 +1081,16 @@
     </main>
 
 
+
     <!-- =====================================================
-         FOOTER
-    ====================================================== -->
+         JAVASCRIPT
+         ===================================================== -->
 
-    <footer>
+    <script
+        type="module"
+        src="script.js">
+    </script>
 
-        <div class="container">
-
-            <p>
-                © 2026 ZISWAF Digital.
-                Berbagi dengan Amanah.
-            </p>
-
-        </div>
-
-    </footer>
-
-
-    <script src="script.js"></script>
 
 </body>
 
