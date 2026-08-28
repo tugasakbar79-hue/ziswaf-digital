@@ -1,4 +1,3 @@
-
 /* =========================================
    ZISWAF DIGITAL - SCRIPT.JS
    DATABASE ONLINE FIREBASE
@@ -33,6 +32,9 @@ let donations = [];
 let selectedAmount = 0;
 
 let currentDonation = null;
+
+/* FIX UPLOAD BUKTI HP */
+let selectedPaymentProof = null;
 
 
 /* =========================================
@@ -524,6 +526,11 @@ document.addEventListener(
                     };
 
 
+                    /* RESET BUKTI DONASI SEBELUMNYA */
+
+                    selectedPaymentProof = null;
+
+
                     /* =====================================
                        QRIS
                        ===================================== */
@@ -885,6 +892,11 @@ function showPaymentConfirmation() {
     }
 
 
+    /* RESET BUKTI */
+
+    selectedPaymentProof = null;
+
+
     /* =========================================
        HALAMAN KONFIRMASI
        ========================================= */
@@ -951,6 +963,7 @@ function showPaymentConfirmation() {
                 type="file"
                 id="paymentProof"
                 accept="image/*"
+                capture="environment"
                 style="
                     width:100%;
                     padding:10px;
@@ -958,6 +971,7 @@ function showPaymentConfirmation() {
                     border-radius:10px;
                     background:#fff;
                     box-sizing:border-box;
+                    font-size:14px;
                 "
             >
 
@@ -1022,22 +1036,36 @@ function showPaymentConfirmation() {
             function () {
 
                 const file =
-                    this.files[0];
+                    this.files &&
+                    this.files.length > 0
+                        ? this.files[0]
+                        : null;
 
 
                 if (!file) {
 
-                    proofPreview.innerHTML =
-                        "";
+                    selectedPaymentProof =
+                        null;
+
+
+                    if (proofPreview) {
+
+                        proofPreview.innerHTML =
+                            "";
+
+                    }
 
                     return;
 
                 }
 
 
-                /* HANYA GAMBAR */
+                /* =====================================
+                   CEK TIPE FILE
+                   ===================================== */
 
                 if (
+                    !file.type ||
                     !file.type.startsWith(
                         "image/"
                     )
@@ -1047,45 +1075,92 @@ function showPaymentConfirmation() {
                         "Silakan upload file gambar."
                     );
 
+
+                    selectedPaymentProof =
+                        null;
+
+
                     this.value =
                         "";
+
+
+                    if (proofPreview) {
+
+                        proofPreview.innerHTML =
+                            "";
+
+                    }
 
                     return;
 
                 }
 
 
-                /* PREVIEW */
+                /* =====================================
+                   SIMPAN FILE
+                   ===================================== */
 
-                const reader =
-                    new FileReader();
-
-
-                reader.onload =
-                    function (e) {
-
-                        proofPreview.innerHTML = `
-
-                            <img
-                                src="${e.target.result}"
-                                alt="Preview bukti pembayaran"
-                                style="
-                                    max-width:100%;
-                                    max-height:220px;
-                                    border-radius:10px;
-                                    object-fit:contain;
-                                    border:1px solid #ddd;
-                                "
-                            >
-
-                        `;
-
-                    };
+                selectedPaymentProof =
+                    file;
 
 
-                reader.readAsDataURL(
-                    file
-                );
+                /* =====================================
+                   PREVIEW
+                   ===================================== */
+
+                if (proofPreview) {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (e) {
+
+                            proofPreview.innerHTML = `
+
+                                <img
+                                    src="${e.target.result}"
+                                    alt="Preview bukti pembayaran"
+                                    style="
+                                        width:100%;
+                                        max-width:320px;
+                                        max-height:220px;
+                                        border-radius:10px;
+                                        object-fit:contain;
+                                        border:1px solid #ddd;
+                                    "
+                                >
+
+                            `;
+
+                        };
+
+
+                    reader.onerror =
+                        function () {
+
+                            proofPreview.innerHTML = `
+
+                                <small
+                                    style="
+                                        color:#718078;
+                                    ">
+
+                                    File berhasil dipilih.
+
+                                </small>
+
+                            `;
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
 
             }
         );
@@ -1108,6 +1183,9 @@ function showPaymentConfirmation() {
         paymentBack.addEventListener(
             "click",
             function () {
+
+                selectedPaymentProof =
+                    null;
 
                 restoreQRISModal();
 
@@ -1223,7 +1301,6 @@ function restoreQRISModal() {
 
 /* =========================================
    SIMPAN DONASI KE FIREBASE
-   SIMULASI BUKTI PEMBAYARAN
    ========================================= */
 
 async function confirmPayment() {
@@ -1240,23 +1317,46 @@ async function confirmPayment() {
 
 
     /* =========================================
-       CEK BUKTI
+       CEK BUKTI PEMBAYARAN
        ========================================= */
 
-    const paymentProof =
-        document.getElementById(
-            "paymentProof"
-        );
-
-
-    if (
-        !paymentProof ||
-        !paymentProof.files ||
-        paymentProof.files.length === 0
-    ) {
+    if (!selectedPaymentProof) {
 
         alert(
             "Silakan upload bukti pembayaran terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    /* =========================================
+       CEK FILE
+       ========================================= */
+
+    const file =
+        selectedPaymentProof;
+
+
+    if (!file) {
+
+        alert(
+            "Bukti pembayaran tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !file.type ||
+        !file.type.startsWith("image/")
+    ) {
+
+        alert(
+            "Bukti pembayaran harus berupa gambar."
         );
 
         return;
@@ -1277,10 +1377,6 @@ async function confirmPayment() {
         return;
 
     }
-
-
-    const file =
-        paymentProof.files[0];
 
 
     try {
@@ -1419,6 +1515,12 @@ async function confirmPayment() {
 
 
     currentDonation =
+        null;
+
+
+    /* RESET BUKTI */
+
+    selectedPaymentProof =
         null;
 
 
